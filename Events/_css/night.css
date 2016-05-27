@@ -1,0 +1,9 @@
+body {
+	background: #333;
+	color: #ccc;
+}
+button {
+	background-color: orange;
+	color: black; font-size: .8em; font-weight: bold;
+	border: 1px solid white;
+}

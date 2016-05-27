@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<!-- 
+	Creating and Apending Content
+	Now also moving content within the DOM
+-->
+<head>
+	<meta charset=utf-8>
+	<title>Slides & Structure</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<script src="../jquery-1.12.3.js"></script>
+</head> 
+<body>
+	<div id="container">
+		<h1>Slides & Structure | OOP jQuery</h1>
+		<article class="blog-post">
+			<h2>Blog Post</h2>
+			<hr>
+			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. Porttitor, pellentesque hendrerit mi vestibulum, gravida morbi ad mi.</p>
+				<blockquote>Ex, mauris erat integer nec, elit tempor sed elit, magna, orci eleifend, nibh nunc, ornare eleifend.</blockquote> 
+			<p>Ultricies nisi elementum placerat porta. Rutrum urna bibendum tincidunt condimentum nunc a, nisi, donec laoreet, in dolor, nullam eros, nostra, vivamus.</p>
+					
+			<p>Nisl elit eros, cras sed sem, cursus blandit, luctus, iaculis non, et, mattis mauris. Sagittis, ornare ante, et, lectus rhoncus, orci finibus lorem, vestibulum, sagittis risus. Nullam dolor tristique a porttitor vestibulum, elit et, accumsan sagittis, praesent aptent congue, tempor, tincidunt. Elit phasellus elit, ad eleifend sagittis, maximus lacinia auctor, arcu tempor mi. Lobortis neque leo, quis lectus nec, hendrerit mauris, nisi. Mi, lacinia, dui, ut tellus, nec id. <span class="co">Maximus velit ultrices vitae, lorem.</span></p>
+		</article>
+
+		<form action="#" id="contact-form">
+			<h2>Contact Form</h2>
+			<ul>
+				<li>
+					<label for="name">Name: </label>
+					<input type="text" id="name" name="name">
+				</li>
+				<li>
+					<label for="email">Email: </label>
+					<input type="email" id="email" name="email">
+				</li>
+				<li>
+					<label for="comments">Comments: </label>
+					<textarea type="text" id="comments" name="comments" rows="8"></textarea>
+				</li>
+				<li>
+					<input type="submit" value="Submit Comments">
+				</li>
+			</ul>
+		</form>
+	</div>
+<script>
+(function($){
+	(function(){
+
+		// script 1: pulls out spans with a class of .co
+		var co = $('.co').each(function(){
+			$('<blockquote></blockquote>', {
+				class: 'co',
+				text: $(this).text()
+			}).prependTo($(this).closest('p'));
+		});
+
+		// script 2: add class of .js to the html element
+		// if javascript is turned off then alternate styles will apply to the form
+		$('html').addClass('js');
+
+		// script 3: lets set up with an object literal as a constructor
+		var contactForm = {
+
+			contact: $('#contact-form'),
+
+			config: {
+				effect: 'slideToggle',
+				speed: 500
+			},
+
+			init: function(config){
+				$.extend(this.config, config);
+				console.log(this);
+
+				$('<button></button>', {
+					text: 'Contact Me'
+				}).insertAfter('article')
+					.on('click', this.show, console.log(this));
+			},
+
+			show: function(){
+				var cf = contactForm,
+					cont = cf.contact,
+					conf = cf.config;
+
+				if( cont.is(':hidden') ){
+					contactForm.close.call(cont);
+					cont[conf.effect]();
+				}
+
+			},
+
+			close: function(){
+				var $this = $(this); // #contact-form
+				$('<span class=close>X</span>')
+					.prependTo('#contact-form')
+					.on('click', function(){
+						$this[contactForm.config.effect](contactForm.config.speed);
+					})
+			}
+		};
+
+		contactForm.init({
+			effect: 'fadeToggle',
+			speed: 600
+		});
+
+
+	})();
+})(jQuery);
+</script>
+</body>
+</html>

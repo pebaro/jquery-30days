@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<!-- 
+	Creating and Apending Content
+	Now also moving content within the DOM
+-->
+<head>
+	<meta charset=utf-8>
+	<title>Creating, Apending & Moving Content</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<script src="../jquery-1.12.3.js"></script>
+</head> 
+<body>
+<article class="blog-post">
+	<h1>Creating, Apending & <span style="color:#556F06;">Moving</span> Content</h1>
+	<hr>
+	<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. Porttitor, pellentesque hendrerit mi vestibulum, gravida morbi ad mi.</p>
+		<blockquote>Ex, mauris erat integer nec, elit tempor sed elit, magna, orci eleifend, nibh nunc, ornare eleifend.</blockquote> 
+	<p>Ultricies nisi elementum placerat porta. Rutrum urna bibendum tincidunt condimentum nunc a, nisi, donec laoreet, in dolor, nullam eros, nostra, vivamus.</p>
+
+	<p>Lorem ipsum dolor sit amet nam. Dapibus fringilla, per leo arcu libero sapien dictumst accumsan elementum lectus dictum ligula, commodo augue amet. Viverra eleifend adipiscing at, pellentesque quam sed, lacinia mauris, justo a, volutpat, bibendum consectetur dui porttitor, fringilla tellus. Maximus feugiat, ligula, ultrices praesent enim, justo mi ullamcorper metus vitae, tellus, leo.</p>
+	
+	<p><span class="co">Lorem ipsum dolor sit amet arcu, lorem, urna ad varius, nullam quis platea proin posuere.</span> Ligula mattis tortor interdum, euismod sollicitudin sed purus ex volutpat, elementum. Nunc tellus, auctor pharetra porttitor sem, elit, class pulvinar quam, eget finibus luctus ullamcorper efficitur vehicula sapien lacus. Curabitur eget sem, molestie vel, vestibulum. Odio rhoncus, tellus, posuere erat scelerisque ligula, leo, urna dapibus enim, suscipit sem eu. Commodo, metus inceptos dui, amet orci varius, taciti sit dictumst per varius mattis, justo neque nec.</p>
+
+	<p>Lorem ipsum dolor sit amet pharetra fringilla, dignissim erat nam fringilla libero ex mollis orci congue mauris, litora massa. Ultricies blandit, porta, arcu nulla est luctus litora aenean hendrerit praesent tempor tristique blandit cursus molestie taciti congue. Odio, magna, diam non bibendum, eros, sem fringilla, placerat, ante, taciti pellentesque ex, sed aptent dictumst dui.</p>
+
+	<p>Nisl elit eros, cras sed sem, cursus blandit, luctus, iaculis non, et, mattis mauris. Sagittis, ornare ante, et, lectus rhoncus, orci finibus lorem, vestibulum, sagittis risus. Nullam dolor tristique a porttitor vestibulum, elit et, accumsan sagittis, praesent aptent congue, tempor, tincidunt. Elit phasellus elit, ad eleifend sagittis, maximus lacinia auctor, arcu tempor mi. Lobortis neque leo, quis lectus nec, hendrerit mauris, nisi. Mi, lacinia, dui, ut tellus, nec id. <span class="co">Maximus velit ultrices vitae, lorem.</span></p>
+
+	<p>Fringilla, bibendum quisque a lacinia, interdum, ultrices. At, lectus, primis ligula, habitasse luctus, hendrerit pharetra condimentum suscipit feugiat. Eros porta, in dolor accumsan est quisque scelerisque. Luctus vehicula sodales varius, pretium magna volutpat diam orci, massa, quis, efficitur imperdiet odio, mauris vitae tortor convallis.</p>
+
+</article>
+
+<script>
+(function($){
+	(function(){
+
+		// script 1: .appendTo() inspect element to understand result
+		// $('blockquote').appendTo('article p:nth-last-child(2)');
+
+		// script 2: .insertAfter() this gives what was intended from script 1
+		// $('blockquote').insertAfter('article p:nth-last-child(2)');
+
+		// script 3: .insertAfter() this gives script 2 with a change of content
+		// $('blockquote').text('Changing the content of the <blockquote>').insertAfter('article p:nth-last-child(2)');
+
+		// script 4: this demos why you need to be specific
+		// the result from this script will give a duplicate after every <p> tag
+		// $('p').after($('h1'));
+
+		// script 5: this also demos why you need to be specific
+		// the result from this script will give a duplicate after every <p> tag from specified point
+		// $('p:nth-child(n+5)').after($('h1'));
+
+		// script 6: this also demos why you need to be specific
+		// the result from this script will give what you want where you want
+		// .eq() is just one way of doing this
+		// $('p').eq(2).after($('h1'));
+
+		// script 7: this method uses a function to achieve the same thing
+		/* $('p').eq(0).after(function(){
+			return $(this).prev();
+		}); */
+
+		// script 8: start of script 9 to check we're on the right lines
+		/* var co = $('span.co').each(function(){
+			$(this).closest('p').prepend('Hey!');
+		}); */
+
+		// script 9: continuation of script 8
+		var co = $('span.co').each(function(){
+
+			var $this = $(this);
+
+			$('<blockquote></blockquote>', {
+				class: 'co',
+				text: $this.text()
+
+			}).prependTo( $this.closest('p') ); 
+		});
+
+	})();
+})(jQuery);
+</script>
+</body>
+</html>

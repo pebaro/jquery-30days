@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<!-- Effects -->
+<head>
+	<meta charset=utf-8>
+	<title>Effects</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<script src="../jquery-1.12.3.js"></script>
+</head> 
+<body>
+	<div id="container">
+		<h1>Effects</h1>
+		<article class="blog-post">
+			<h2>Blog Post</h2>
+			<hr>
+			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. Porttitor, pellentesque hendrerit mi vestibulum, gravida morbi ad mi.</p>
+				<blockquote>Ex, mauris erat integer nec, elit tempor sed elit, magna, orci eleifend, nibh nunc, ornare eleifend.</blockquote> 
+			<p>Ultricies nisi elementum placerat porta. Rutrum urna bibendum tincidunt condimentum nunc a, nisi, donec laoreet, in dolor, nullam eros, nostra, vivamus.</p>
+					
+			<p>Nisl elit eros, cras sed sem, cursus blandit, luctus, iaculis non, et, mattis mauris. Sagittis, ornare ante, et, lectus rhoncus, orci finibus lorem, vestibulum, sagittis risus. Nullam dolor tristique a porttitor vestibulum, elit et, accumsan sagittis, praesent aptent congue, tempor, tincidunt. Elit phasellus elit, ad eleifend sagittis, maximus lacinia auctor, arcu tempor mi. Lobortis neque leo, quis lectus nec, hendrerit mauris, nisi. Mi, lacinia, dui, ut tellus, nec id. <span class="call-out">Maximus velit ultrices vitae, lorem.</span></p>
+		</article>
+	</div>
+<script>
+(function($){
+	(function(){
+		
+		// setup blog post
+		var callOut = $('.call-out').each(function(){ 
+			$('<blockquote></blockquote>', {
+				class: 'call-out',
+				text: $(this).text(),
+			// set position of '.each' occurance	
+			}).prependTo($(this).closest('p'));
+		});
+		
+		//custom speeds
+		$.fx.speeds.vfast = 100;
+		
+		// speeds demo
+		$('article').hide();
+		$('h1').on('click', function(){
+			$(this).next().slideToggle('vfast'); 
+			// _default does not need to be specified
+			// if jQuery does not understand value it uses _default
+		});
+		
+		// find out default speed values
+		console.log($.fx.speeds);
+
+	})();
+})(jQuery);
+</script>
+</body>
+</html>

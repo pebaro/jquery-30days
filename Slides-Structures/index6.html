@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+<!-- This is the refactored version of index4.html -->
+<head>
+	<meta charset=utf-8>
+	<title>Slides & Structure</title>
+	<link rel="stylesheet" type="text/css" href="_css/main3.css">
+	<script src="../jquery-1.12.3.js"></script>
+</head> 
+<body>
+	<div id="container">
+
+		<h1>Object Oriented jQuery</h1>
+
+		<article class="blog-post">
+			<h2>First Blog Post</h2>
+			<hr>
+			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. Porttitor, pellentesque hendrerit mi vestibulum, gravida morbi ad mi.</p>
+				<blockquote>Ex, mauris erat integer nec, elit tempor sed elit, magna, orci eleifend, nibh nunc, ornare eleifend.</blockquote> 
+			<p>Ultricies nisi elementum placerat porta. Rutrum urna bibendum tincidunt condimentum nunc a, nisi, donec laoreet, in dolor, nullam eros, nostra, vivamus. <span class="call-out">Maximus velit ultrices vitae, lorem.</span></p>
+			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac.</p>
+			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. <span class="call-out">Porttitor, pellentesque</span> mi vestibulum, gravida morbi ad mi.</p>
+		</article>
+
+		<div id="comments-form">
+			<form action="#">
+				<h2 class="form-heading">Comments Form</h2>
+				<ul>
+					<li>
+						<label for="name">Name: </label>
+						<input type="text" id="name" name="name">
+					</li>
+					<li>
+						<label for="email">Email: </label>
+						<input type="email" id="email" name="email">
+					</li>
+					<li>
+						<label for="comments">Comments: </label>
+						<textarea type="text" id="comments" name="comments" rows="8"></textarea>
+					</li>
+					<li>
+						<input type="submit" value="Submit Comments">
+					</li>
+				</ul>
+			</form>
+		</div>
+
+	</div>
+<script>
+(function($){ // for use in WordPress files
+	(function(){ // shorthand (document).ready(function(){});
+	
+		/* script: blog post style of html using '.call-out' class */
+		// set an event for '.each' occurance of '.call-out' class
+		var callOut = $('.call-out').each(function(){ 
+			// create a <blockquote>, use an object to fill the content
+			$('<blockquote></blockquote>', {
+				class: 'call-out',
+				text: $(this).text(),
+				//log: console.log(this) // demos 'this' keyword
+			// set position of '.each' occurance	
+			}).prependTo($(this).closest('p'));
+			//console.log(this); /* 'this' works as eg within object contents but see difference in console */
+		});
+
+		/* form script: refactored index4.html */
+		$('html').addClass('js'); // add jQuery to page
+		// create parent object attached to '#comments-form'
+		var commentsForm = {
+
+			// technique for creating variable within an object
+			comments: $('#comments-form'), // #comments-form
+
+
+
+			backdrop: function(){
+					$('html').addClass('backdrop');
+			},
+			startpoint: function(){
+				$('html').removeClass('backdrop');
+			},
+			
+			// object for user modifictions of effects
+			config: {
+				formShow: 'fadeIn',
+				formHide: 'fadeOut',
+				showSpeed: 500,
+				hideSpeed: 250,
+				//log: console.log(this) /* demo of 'this' */
+			}, // end 'config' object
+				
+			// pass the 'config' object to '.extend' the script
+			init: function(config){
+				// first paramenter: 'this.config'
+				// second paremeter after the comma: 'config'
+				$.extend(this.config, config);
+				
+				// fill button using object notation
+				$('<button></button>', {
+					text: 'Send Us Your Comments'
+				})
+				// insert button after <article>
+				.insertAfter('article.blog-post')
+				// on 'click' we'll call the 'show' method
+				.on('click', this.show); // 'this' = #comments-form
+			}, // end 'init' method (known as 'constructor')
+
+			// create 'show' method
+			show: function(){
+				// caching to cleanup
+				var cf = commentsForm;
+				var comms = cf.comments;
+				var conf = cf.config;
+								
+				if( comms.is(':hidden') ) {
+					cf.close.call(comms);
+					comms[conf.formShow](conf.showSpeed);
+				}
+				cf.backdrop.call();
+				
+				
+			}, // end 'show' method
+
+			// create 'close' method
+			close: function(){
+				// setting 'this' to the #comments-form <div>
+				var $this = $(this);
+				
+				/* check if close button has already been added
+				if it has then do not add another */
+				if( $this.find('span.xclose').length ) return;
+				
+				// caching to cleanup
+				var cf = commentsForm,
+					comms = cf.comments,
+					conf = cf.config;				
+				// creating the close button
+				$('<span class="xclose">X</span>')
+				// insert close button
+				.prependTo(this)
+				// hide the form when close button is clicked
+				.on('click', function(){
+					/* version: array notation with default effect, other versions in index4.html */
+					$this[conf.formHide](conf.hideSpeed);
+					/*
+					  to demo different techniques and results demo-ing the 'this' keyword in the console, refer to index4.html
+					*/
+					//console.log(this);
+					cf.startpoint.call();
+				});
+			} // end 'close' method
+		};
+		/*
+		  call first method 'init' (the constructor method) 
+		  run the script commentsForm.init();
+		  add more flexibility to user adjustable effects
+		*/
+		commentsForm.init({
+			// comment out lines to use defaults
+			formShow: 'slideDown',
+			formHide: 'fadeOut',
+			showSpeed: 300,
+			hideSpeed: 300
+		});
+
+	})(); // end shorthand (document).ready(function(){});
+})(jQuery); // end for WordPress files
+</script>
+</body>
+</html>

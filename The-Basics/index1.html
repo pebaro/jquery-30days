@@ -1,0 +1,53 @@
+<html>
+
+<head>
+	<title>using jQuery</title>
+
+	<style>
+	/*script 1*/
+	ul li {color: red;} 
+
+	/*script 3*/
+	.blue {color: blue;} 
+	</style>
+
+</head>
+
+<body>
+
+	<ul>
+		<li>hello 1</li>
+		<li>hello 2</li>
+		<li>hello 3</li>
+	</ul>
+
+<!-- scripts -->
+
+<!-- embedded -->
+<!-- <script src="../jquery-1.12.3.js"></script> -->
+
+<!-- Google CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.js"></script>
+<!-- scroll to bottom of link to get meaning of jQuery and the $ sign -->
+
+<script>
+
+// script 1
+/*
+var list = jQuery('ul li');
+console.log(list);
+*/
+
+// script 2
+// jQuery('ul li').css('color', 'green');
+
+// script 3
+console.log(jQuery('ul li').addClass('blue'));
+jQuery('ul li').addClass('blue');
+
+
+</script>
+
+</body>
+
+</html>

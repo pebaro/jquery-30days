@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<!-- 
+	At this point, we know that we can search, or query the DOM using the CSS selectors that we're already familiar with; but what about moving around the DOM after the fact? We'll review a handful of traversal methods that you'll use often in your projects, including children(), find(), parent(), closest(), and next(). 
+-->
+<head>
+	<meta charset=utf-8>
+	<title>Parent and Parents</title>
+
+	<style> /* script 1 */
+		ul, li { list-style: none; }
+		li { font-weight: bold; color: #777; }
+		ul.bold > li { font-weight: bold; color: red; }
+		.container { color: blue; }
+		.colorChange { color: orange !important; }
+	</style>
+
+</head>
+
+<body>
+<div class="container colorchange">
+	<h1>Think of the DOM as a family tree</h1>
+
+	<p class="opening">Testing on code below</p>
+
+	<ul class="bold">
+		<li>hello 1</li>
+		<li>hello 2</li>
+		<ul>
+			<li>nested decendant list item</li>
+		</ul>
+	</ul>
+
+</div>
+
+
+<script src="../jquery-1.12.3.js"></script>
+
+<script>// script 1
+/* 
+	.parent moves up to the immediate parent only
+	.parents will continue to move up until it reaches the element requested
+	(better for performance to be more specific ie. div.container instead)
+*/
+/*
+(function($){
+	$(function(){
+		//$('li').parent().addClass('colorChange');
+
+		$('li').parents('.container').addClass('colorChange');
+	});
+})(jQuery);
+*/
+</script>
+
+<script>// script 2
+/* 
+*/
+(function($){
+	$(function(){
+		// traversing up the DOM
+		$('li').closest('div.container').addClass('colorChange');
+
+		// traversing down the DOM
+		$('.bold > ul').children('li').text('got you');
+
+		// styling first list item
+		$('.bold li').first().text('first list item');
+
+		// adding in some css
+		$('.bold').children('li:first-child').css('color','blue');	
+	});
+})(jQuery);
+</script>
+
+</body>
+
+</html>

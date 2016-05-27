@@ -1,0 +1,64 @@
+<html>
+
+<head>
+	<title>document ready</title>
+
+	<style>
+	/*script 1*/
+	ul li {color: red;} 
+
+	/*script 3*/
+	.blue {color: blue;} 
+	</style>
+
+<script src="../jquery-1.12.3.js"></script>
+
+<!-- script 2 -->
+<!--
+<script>
+	$(document).ready(function(){
+		$('li:first-child').addClass('blue');
+	});
+</script>
+-->
+
+
+<!-- script 3 | shortcut for the document ready function-->
+<script>
+	$(function(){
+		$('li:first-child').addClass('blue');
+	});
+</script>
+
+
+</head>
+
+<body>
+
+	<ul>
+		<li>hello 1</li>
+		<li>hello 2</li>
+		<li>hello 3</li>
+	</ul>
+
+
+
+
+<!-- script 1 -->
+<!--
+	place your script before the closing body tag to avoid needing to use 
+	$(document).ready(function(){
+		// code in here
+	}); 
+
+	<script src="../jquery-1.12.3.js"></script>
+	<script>
+		$('li:first-child').addClass('blue');
+	</script>
+-->
+
+
+
+</body>
+
+</html>

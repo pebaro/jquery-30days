@@ -1,0 +1,131 @@
+body {
+	font-family: sans-serif; background: #f5f5f5; text-align: left;
+}
+#container { margin: 0 auto; width: 60%; position: relative; }
+hr {
+	margin: 25px 0 20px 20px;
+}
+.hide { display: none; }
+article {
+	width: inherit; margin: 20px 0; padding: 20px 20% 10px; background: #FFF;
+}
+blockquote {
+	border-left: 4px solid #8E5F0A; padding: 5px 0 5px 20px; margin: 0 0 25px 30px;
+	color: #9E8350;
+}
+blockquote.co {
+	float: right; color: rgba(51, 51, 51, 0.59); font-weight: bold;
+	background: rgba(218, 148, 43, 0.13); border-left: none; border: 1px solid #999 !important; border-right: none !important;
+	padding: 0.5em 1em; margin: 5px 0 10px 20px !important;
+}
+h1 {
+	margin: 20px 20px; font-size: 1.2em; text-align: right; color: #999;
+}
+h2 {
+	font-size: 1.4em; font-weight: bold; color: #8E5F0A;
+}
+.object {
+	font-size: 1.1em; font-weight: bold; color: #556F06;
+}
+p {
+	color: #777; font-size: 0.8em; line-height: 1.4em;
+	margin: 0 0 30px;
+}
+p:last-child {
+	margin-bottom: 20px !important;
+}
+.p-object {
+	color: #556F06; font-size: 0.75em; font-weight: bold; line-height: 1.4em;
+	margin: 0 0 30px;
+}
+form, .js form { padding: 20px 20%; }
+form {
+	width: inherit; position: relative;
+	background: #555;
+}
+.js form {
+	position: absolute; top: 40px;
+	width: inherit; display: none;
+}
+.js #comments-form {
+	position: absolute; top: 40px;
+	width: inherit;
+	background: #555; display: none;
+}
+#comments-form {
+	position: relative;
+	width: inherit;
+	background: #555; display: block;
+}
+#contact-form div { margin-right: 40px;  border-right: 2px dashed #999 !important; }
+form h2 { color: #F9F1D2; }
+ul, li {
+	list-style: none;
+	margin: 0; padding: 0;
+}
+label {
+	display: block; color: #F1D97F; font-size: 0.6em; font-weight: normal;
+	clear: both;
+}
+input { width: 65%; } textarea { width: 80%; }
+input, textarea {
+	margin: 2px 40px 20px 0; padding: 10px 8px; border-radius: 2px;
+	border: #333; font-size: 0.8em; 
+}
+input:focus, textarea:focus { background: #333; border: #000; color: #F9F1D2; }
+input[type="submit"] {
+	width: auto; background: none; padding: 10px 20px;
+	border: 1px solid #F9F1D2; border-radius: 4px;
+	font-weight: bold; color: #F9F1D2; font-size: 0.7em;
+	cursor: pointer;
+	-webkit-transition: all 0.6s ease;
+	-moz-transition: all 0.6s ease;
+	-ms-transition: all 0.6s ease;
+	-o-transition: all 0.6s ease;
+	transition: all 0.6s ease;
+
+}
+input[type="submit"]:hover {
+	background: #333;
+	border: 1px solid #F1D97F;
+	font-weight: bold; color: #F1D97F;
+}
+button {
+	width: auto; background: transparent; padding: 10px 20px; margin-left: 20px;
+	border: 1px solid #8E5F0A; border-radius: 5px;
+	font-weight: bold; color: #8E5F0A; font-size: 0.7em;
+	cursor: pointer;
+	-webkit-transition: all 0.6s ease;
+	-moz-transition: all 0.6s ease;
+	-ms-transition: all 0.6s ease;
+	-o-transition: all 0.6s ease;
+	transition: all 0.6s ease;
+}
+button:hover {
+	background: #8E5F0A;
+	border: 1px solid #000;
+	color: #FFF;
+}
+span.close {
+	color: #F32465; font-weight: bold; font-size: 0.7em;
+	position: absolute; background: none;
+	top: 20px;
+	right: 20px;
+	cursor: pointer;
+	padding: 5px 10px;
+	border: 1px dotted rgba(243, 36, 101, 0.5); border-radius: 2px;
+	-webkit-transition: all 0.6s ease;
+	-moz-transition: all 0.6s ease;
+	-ms-transition: all 0.6s ease;
+	-o-transition: all 0.6s ease;
+	transition: all 0.6s ease;
+}
+span.close:hover {
+	color: #000; font-weight: bold; font-size: 0.7em;
+	position: absolute; background: #FFF;
+	top: 20px;
+	right: 20px;
+	cursor: pointer;
+	padding: 5px 10px;
+	border: 1px dotted #FFF; border-radius: 2px;
+}

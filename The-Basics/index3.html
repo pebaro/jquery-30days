@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset=utf-8>
+	<title>querying the DOM</title>
+<!--
+	<style>
+	/*script 1*/
+
+		ul.bold li { 
+			/*
+			this will get any list item, 
+			as long as it is a decendent of the ul
+			*/
+			font-weight: bold;
+			color: black;
+		}
+
+	</style>
+--><!--	
+	<style>
+	/*script 2*/
+
+		li { color: #999; }
+		ul.bold > li { /* this will get only the direct children */
+			font-weight: bold;
+			color: red;
+		}
+
+	</style>
+--><!--	
+	<style>
+	/*script 3*/
+
+		li { color: #999; }
+		ul.bold > li { /* this will get only the direct children */
+			font-weight: bold;
+			color: red;
+		}
+
+	</style>
+-->
+
+</head>
+
+<body>
+<div class="container">
+	<h1>Welcome</h1>
+
+	<p>paragraph of text for the html page</p>
+
+	<ul class="bold">
+		<li>hello 1</li>
+		<li>hello 2</li>
+		<ul>
+			<li>nested list item, not direct child</li><!-- this is what we call a descendent -->
+		</ul>
+	</ul>
+
+</div>
+
+
+<script src="../jquery-1.12.3.js"></script>
+
+<script>// script 1
+// .childrenn looks for immediate children of a parent
+
+	/*$('ul.bold').children('li').text('affects all immediate children')
+	// adding a chaining affect as an after thought
+	.next('ul').find('li').text('this remains the same');
+
+	console.log($('ul.bold > li > ul > li'));*/
+</script>
+
+<script>// script 2
+// .children can use jQuery for CSS styling of immediate children only
+
+	//$('ul.bold').children('li').css('color', 'green');
+	//console.log($('ul.bold').children('li').css('color', 'green'));
+</script>
+
+<script>// script 3
+// .find using jQuery for CSS styling of all children
+
+	$('ul.bold').find('li').css('color', 'green');
+</script>
+</body>
+
+</html>

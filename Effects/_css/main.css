@@ -1,0 +1,10 @@
+body {
+	font-family: sans-serif; background: #f5f5f5; text-align: left;
+}
+h1 {
+	cursor: pointer;
+}
+article {
+	display: none;
+	background: #fcfcfc; padding: 15px 25px;	
+}

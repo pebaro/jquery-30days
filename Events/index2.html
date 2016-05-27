@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<!-- 
+	let's get started on building the stylesheet changer
+	using .attr refers to attribute .attr caan take up to two values
+	if you use two values you are setting the value
+	if you use one value you are returning the value to a variable for example
+-->
+<head>
+	<meta charset=utf-8>
+	<title>jQuery Events</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<link rel="stylesheet" type="text/css" href="_css/day.css" class="style-change">
+</head> 
+<body>
+<div class="container">
+	<h1>Stylesheet Selector</h1>
+
+	<p class="opening">This is our opening paragraph of text</p>
+
+	<button>Day</button>
+	<button>Night</button>
+
+</div>
+
+<script src="../jquery-1.12.3.js"></script>
+
+<script>
+(function($){
+// script 1: convenience method
+	(function(){
+		$('button').click(function(){
+
+			var text = $(this).text().toLowerCase();
+			console.log(text);
+
+			var folder = '_css/';
+
+			$('link.style-change').attr('href', folder + text + '.css');
+		});
+	})();
+})(jQuery);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<!-- 
+	Bind, Live, Delegate
+-->
+<head>
+	<meta charset=utf-8>
+	<title>Bind</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<script src="../jquery-1.12.3.js"></script>
+</head> 
+<body>
+<div class="container">
+	<h1>Bind</h1>
+	<h2>Click Me</h2>
+	<h2>Click Me</h2>
+	<h2>Click Me</h2>
+	<h2>Click Me</h2>
+</div>
+
+<script>
+(function($){
+	(function(){
+
+		// script 4
+		// let's use .clone and include parameters
+		$('h2').bind('click', function(){
+			console.log('An h2 has been clicked! \nThe event handlers have also been cloned!');
+
+			// using 'true' will also clone the event handler 
+			// using 'false' which is the default will not
+			var cloned = $(this).clone(true);
+
+			// cloned.appendTo(document.body);
+			cloned.appendTo('div.container');
+
+			console.log(cloned);
+		})
+/*
+		// script 3
+		// let's play around with .clone a bit more
+		// we're not passing in any parameters at this point so events are not cloned, just the element
+		$('h2').bind('click', function(){
+			console.log('h2 has been clicked!');
+
+			var cloned = $(this).clone();
+
+			// cloned.appendTo(document.body);
+			cloned.appendTo('div.container');
+
+			console.log(cloned);
+		})
+*/
+/*
+		// script 2
+		// let's start off introducing .clone()
+		$('h2').bind('click', function(){
+			console.log('h2 has been clicked!');
+
+			var cloned = $(this).clone();
+			console.log(cloned);
+		})
+*/
+/*		
+		// script 1: using .bind
+		// this script attachs an event handler to every H2 element on the page
+		$('h2').bind('click', function(){
+			console.log('h2 has been clicked!');
+		});
+*/
+	})();
+})(jQuery);
+</script>
+</body>
+</html>

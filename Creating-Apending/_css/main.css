@@ -1,0 +1,39 @@
+body {
+	font-family: sans-serif; background: #f5f5f5;
+}
+hr {
+	margin: 10px 40px 20px;
+}
+.hide { display: none; }
+article {
+	width: 960px; margin: 20px auto; padding: 20px 40px; background: #FFF;
+}
+blockquote {
+	border-left: 4px solid #8E5F0A; padding: 5px 0 5px 20px; margin: 0 0 25px 30px;
+	color: #9E8350;
+}
+blockquote.co {
+	float: right; color: #333;
+	background: rgba(34, 71, 97, 0.13); border-left: none; border: 1px solid #999 !important;
+	padding: 0.5em 1em; margin: 5px 0 10px 20px !important;
+}
+h2 {
+	font-size: 0.9em; font-weight: bold; color: #555;
+}
+.object {
+	font-size: 1.1em; font-weight: bold; color: #556F06;
+}
+p {
+	color: #777; font-size: 0.8em; line-height: 1.4em;
+	margin: 0 0 30px;
+}
+.p-object {
+	color: #556F06; font-size: 0.75em; font-weight: bold; line-height: 1.4em;
+	margin: 0 0 30px;
+}
+/*
+.co {
+	border-left: 2px solid #8E5F0A; padding: 5px 0 5px 6px; margin: 0 0 25px 15px;
+	color: #9E8350; font-weight: bold; font-size: 0.85em;
+}
+*/

@@ -1,0 +1,15 @@
+body {
+	font-family: sans-serif;
+}
+.hide { display: none; }
+
+h2 {
+	background: #444; padding: .2em; border: 2px solid black;
+	font-weight: bold; font-size: 0.9em; color: orange; text-align: center;
+	cursor: pointer; width: 100px;
+}
+
+h4.bind {
+	cursor: pointer; color: blue;
+}
+

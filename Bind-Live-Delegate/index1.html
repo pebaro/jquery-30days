@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<!-- 
+	Bind, Live, Delegate
+-->
+<head>
+	<meta charset=utf-8>
+	<title>Bind, Live, Delegate...</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<script src="../jquery-1.12.3.js"></script>
+</head> 
+<body>
+<div class="container">
+	<h1>Bind, Live, Delegate</h1>
+	<h2 class="opening">These are all deprecated and now replaced with the .on method</h2>
+	<p>more information on this can be found at: <a href="https://code.jquery.com/jquery-1.12.3.js" target="_blank" title="jQuery Code Reference">jQuery uncompressed framework reference</a>.<br>
+	by running a search on this page using <strong>Ctrl + F</strong> and then entering the following in the search box: <strong>return arguments.length</strong>you will be able to find which methods are attached to the .on method and also which are also attached to the .off method</p>
+	<hr>
+	<h3>Second Example Using Above Search:</h3>
+	<p><pre>jQuery.each( ( "blur focus focusin focusout load resize scroll unload click dblclick " +
+	"mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
+	"change select submit keydown keypress keyup error contextmenu" ).split( " " ),
+	function( i, name ) {
+
+	// Handle event binding
+	jQuery.fn[ name ] = function( data, fn ) {
+		return arguments.length > 0 ?
+			this.on( name, null, data, fn ) :
+			this.trigger( name );
+	};
+} );</pre></p>
+	<hr>
+
+	<h4 class="bind">.bind</h4>
+	<pre>
+$('h4.bind').bind('click', function(){
+	console.log('h4 with a class of "bind" has been clicked!');
+});
+	</pre>
+
+	<strong>same as:</strong><br>
+	<pre>
+.click(function(){
+	// code
+}); 
+	</pre>
+
+	<strong>or better yet</strong>
+	<pre>
+.on('click', function(){
+	// code
+});
+	</pre>
+
+
+</div>
+
+<script>
+(function($){
+	(function(){
+		// script 1: using .bind
+		// same as .click(function(){}); or better yet .on('click', function(){});
+		$('h4.bind').bind('click', function(){
+			console.log('h4 with a class of "bind" has been clicked!');
+		});
+
+	})();
+})(jQuery);
+</script>
+</body>
+</html>

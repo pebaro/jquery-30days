@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<!-- 
+	Bind, Live, Delegate
+-->
+<head>
+	<meta charset=utf-8>
+	<title>Live</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<script src="../jquery-1.12.3.js"></script>
+</head> 
+<body>
+<div class="container">
+	<h1>Live</h1>
+	<h2>Click Me</h2>
+	<h2>Click Me</h2>
+	<h2>Click Me</h2>
+	<h2>Click Me</h2>
+</div>
+
+<script>
+(function($){
+	(function(){
+
+		// script 1
+		// this will not work with new versions of jQuery as it has been deprecated.
+		$('h2', $('.container')[0]).live('click', function(){
+			console.log('An h2 has been clicked!');
+			$(this).clone().appendTo('body');
+		});
+
+	})();
+})(jQuery);
+</script>
+</body>
+</html>

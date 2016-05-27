@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<!-- 
+	Building a simple FAQ list using an accordion
+-->
+<head>
+	<meta charset=utf-8>
+	<title>Definition List | Simple FAQ Accordion</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<link rel="stylesheet" type="text/css" href="_css/day.css" class="style-change">
+</head> 
+<body>
+<div class="container">
+	<h1>Simple FAQ List</h1>
+	<h2 class="opening">Here is our list of questions below:</h2>
+	<div class="questions">
+		<dl>
+			<dt>Question 1?</dt>
+			<dd>This is the answer to Question 1</dd>
+
+			<dt>Question 2?</dt>
+			<dd>This is the answer to Question 2</dd>
+
+			<dt>Question 3?</dt>
+			<dd>This is the answer to Question 3</dd>
+
+			<dt>Question 4?</dt>
+			<dd>This is the answer to Question 4</dd>
+
+			<dt>Question 5?</dt>
+			<dd>This is the answer to Question 5</dd>
+		</dl>
+	</div>
+
+</div>
+
+<script src="../jquery-1.12.3.js"></script>
+<script>
+(function($){
+	(function(){
+		// script 1: uses a simple class to hide the details, but this hides ALL details
+		// var dd = $('dd');
+		// dd.addClass('hide');
+
+
+/*		// script 2: .filter() allows us to filter only the bits we want
+		var dd = $('dd');
+
+		dd.filter(':nth-child(n+4)').addClass('hide');
+
+		$('dt').on('mouseenter', function(){
+
+			var $this = $(this);
+
+			$this.next().siblings('dd').slideUp();
+			$this.next().slideDown();
+		});
+*/
+
+		// script 3: lets clean this up, remove repetition and improve performance
+		// because of the markup caching is pretty pointless so I'll be removing most of it
+		
+		$('dd').filter(':nth-child(n+4)').addClass('hide');
+
+		$('dl').on('mouseenter', 'dt', function(){
+
+			var $this = $(this);
+
+			$this.next().slideDown(150).siblings('dd').slideUp(300);
+
+		});
+
+	})();
+})(jQuery);
+</script>
+</body>
+</html>

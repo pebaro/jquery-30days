@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+<!--
+	Explaining the $(this) keyword as the meaning changes depending on script location
+-->
+<head>
+	<meta charset=utf-8>
+	<title>$(this)</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<script src="../jquery-1.12.3.js"></script>
+</head> 
+<body>
+	<div id="container">
+
+		<h1>Using $(this)</h1>
+		<h2>Explaining $(this) in different contexts</h2>
+		<hr>
+		<section>
+			<a href="https:imgtec.com" target="_blank">click me</a>
+		</section>
+
+	</div>
+<script>
+(function($){ // for WordPress sites to use '$' instead of 'jQuery' each time
+
+	(function(){ // shorthand (document).ready(function(){});
+		/*
+		  script 1: examples of $(this)
+		  ==================================
+		  when $(this) is not inside any function it refers to the global space or parent object. Of course a (document).ready(function(){}) does not count as a function, it would count as the document window or the window object.
+		*/
+		// Demo 1: where $(this) refers to the parent window object
+		// console.log(this);
+
+		// Demo 2: where $(this) still refers to the parent window object
+		// there are three examples which are exactly the same but written differently
+		/*
+		// A: name a function and call it
+		function runThis(){
+			console.log(this);
+		}
+		runThis();
+		*/
+		/*
+		// B: same as annonymous self-invoking function
+		(function runThis(){
+			console.log(this);
+		})();
+		*/
+		/*
+		// C: a self-invoking annonymous function
+		(function(){
+			console.log(this);
+		})();
+		*/
+		/*
+		// Demo 3: where $(this) refers to item clicked with default behaviour
+		function runThis(){
+			console.log(this);
+		}
+		$('a').on('click', runThis);
+		*/
+		/*
+		// Demo 3: where $(this) refers to item clicked but cancelling default behaviour
+		// cancelling default behaviour shows $(this) no longer refers to parent object
+		// console.log(e) is there to demo info given on function parameter
+		// first create a function called 'runThis'
+		function runThis(e){
+			// e.preventDefault() stops the default ie opening link in new tab
+			e.preventDefault();
+			// log the default behaviour
+			console.log(e);
+			// log 'this'
+			console.log(this);
+		}
+		$('a').on('click', runThis);
+		*/
+		/*
+		// Demo 4: showing $(this) within an object
+		// create object called 'obj'
+		var obj = {
+			// create 'method' called 'runThis'
+			runThis: function(e){
+				// again we want to prevent the default behaviour ie. opening the link
+				e.preventDefault();
+				// let's see in the console what happens
+				console.log(this);
+			}
+		}
+		// when we click the link we run the 'runThis' method from within the 'obj' object
+		$('a').on('click', obj.runThis);
+		*/
+		/*
+		// Demo 5: showing $(this) within an object
+		var obj = {
+			runThis: function(){
+				console.log(this);
+			}
+		}
+		$('a').on('click', function(e){
+			obj.runThis();
+			e.preventDefault();
+		});
+		*/
+		/*
+		// Demo 6:
+		// A:  showing $(this) using '.call' method
+		var obj = {
+			runThis: function(){
+				console.log(this);
+			}
+		}
+		$('a').on('click', function(e){
+			// using .call we can make 'this' refer to the anchor
+			obj.runThis.call(this);
+			e.preventDefault();
+		});
+		*/
+		/*
+		// Demo 6:
+		// B: using '.call' showing the comma seperated list
+		var obj = {
+			runThis: function(){
+				console.log(this);
+			}
+		}
+		$('a').on('click', function(e){
+			// using .call we can make 'this' refer to the anchor
+			// .call uses a comma seperated list to pass parameters
+			obj.runThis.call(this, e.preventDefault());
+		});
+		*/
+		/*
+		// Demo 6:
+		// c: .apply uses an array to paas parameters
+		var obj = {
+			runThis: function(){
+				console.log(this);
+			}
+		}
+		// show 'this' within the object upon page load
+		obj.runThis();
+		// now let's use the apply method to show 'this' also
+		$('a').on('click', function(e){
+			// if we use '.apply' then we use an array in next example
+			obj.runThis.apply( this, [e.preventDefault()] );
+		});
+		*/
+		// Demo 6: showing $(this) within an object using .apply
+		// D: .proxy paases parameters in ()
+		var obj = {
+			runThis: function(e){
+				console.log(this);
+				e.preventDefault();
+			}
+		}
+		// show 'this' within the object upon page load
+		//obj.runThis();
+		// now let's use the apply method to show 'this' also
+		$('a').on('click', $.proxy(obj.runThis, obj));
+
+		/* 
+		   TAKE NOTE: 
+		   '.call' and '.apply' are javascript methods 
+		   '.proxy' is a jQuery method 
+		 */
+
+		
+
+	})(); // shorthand END
+
+})(jQuery); // for WordPress END
+
+</script>
+</body>
+</html>

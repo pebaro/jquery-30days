@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+<!--
+	Creating a show/hide form using OOP
+	This version gives full notes throughout the scripting for tutorial purposes
+	I've also demonstrated throughout what 'this' does in each context which is shown in the console using the browser dev tools
+-->
+<head>
+	<meta charset=utf-8>
+	<title>Slides & Structure</title>
+	<link rel="stylesheet" type="text/css" href="_css/main3.css">
+	<script src="../jquery-1.12.3.js"></script>
+</head> 
+<body>
+	<div id="container">
+
+		<h1>Slides & Structure (OOP jQuery)</h1>
+
+		<article class="blog-post">
+			<h2>First Blog Post</h2>
+			<hr>
+			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. Porttitor, pellentesque hendrerit mi vestibulum, gravida morbi ad mi.</p>
+				<blockquote>Ex, mauris erat integer nec, elit tempor sed elit, magna, orci eleifend, nibh nunc, ornare eleifend.</blockquote> 
+			<p>Ultricies nisi elementum placerat porta. Rutrum urna bibendum tincidunt condimentum nunc a, nisi, donec laoreet, in dolor, nullam eros, nostra, vivamus. <span class="call-out">Maximus velit ultrices vitae, lorem.</span></p>
+			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac.</p>
+			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. <span class="call-out">Porttitor, pellentesque</span> mi vestibulum, gravida morbi ad mi.</p>
+		</article>
+
+		<div id="comments-form">
+			<form action="#">
+				<h2 class="form-heading">Comments Form</h2>
+				<ul>
+					<li>
+						<label for="name">Name: </label>
+						<input type="text" id="name" name="name">
+					</li>
+					<li>
+						<label for="email">Email: </label>
+						<input type="email" id="email" name="email">
+					</li>
+					<li>
+						<label for="comments">Comments: </label>
+						<textarea type="text" id="comments" name="comments" rows="8"></textarea>
+					</li>
+					<li>
+						<input type="submit" value="Submit Comments">
+					</li>
+				</ul>
+			</form>
+		</div>
+
+	</div>
+<script>
+(function($){ // for WordPress files
+	(function(){ // shorthand (document).ready(function(){});
+		/*
+		  ======================================================
+		  script 1: blog post type of html using .call-out class
+		  ======================================================
+		*/
+		// we're going to set an event for each occurance of the .call-out class
+		var callOut = $('.call-out').each(function(){ 
+			// start by creating a <blockquote>
+			$('<blockquote></blockquote>', { // create an object
+				// give the object parameters...
+				class: 'call-out',
+				text: $(this).text()
+			// set position of each occurance	
+			}).prependTo($(this).closest('p'));
+		});
+
+		/*
+		  ===============================================
+		  script 3: index2.html but with more explanation
+		  ===============================================
+		  adding a class of js to act as a hook showing whether or not juery is available for our use.
+		  style first as if javascript is turned off, then style for JavaScript afterwards because you want it to look good regardless of whether or not jQuery is turned on or not.
+		*/
+		$('html').addClass('js'); // add jQuery to page
+
+		// create a parent object attached to the commments form
+		var commentsForm = {
+
+			// create a variable to reference the form
+			comments: $('#comments-form'),
+			
+			// create and effects object
+			config: {
+				effect: 'fadeToggle',
+				speed: 600,
+			},
+
+			// let's get the ball rolling with a constructor called 'init'
+			
+			/* version 1: we do not pass 'config' object yet
+			init: function(){ */
+				
+			// version 2: now pass the 'config' object to include effects
+			// doing this requires an extra line of code to .extend
+			init: function(config){
+				// we use this.config then the ,config tells the script what to use to extent .config with
+				$.extend(this.config, config);
+				
+				// let's create a button
+				$('<button></button>', {
+					// use and object to fill the button with content
+					text: 'Send Us Your Comments'
+				})
+				// insert the button after the <article>
+				.insertAfter('article.blog-post')
+				// instead of an annonymous function we'll call a method
+				.on('click', this.show);
+			},
+
+			// create the 'show' method
+			show: function(){
+				// demo that 'show' method is working
+				console.log('show method is working');
+				/*
+				  remember 'this' witin a callback function will not work
+				  instead we need to call the method by name 'comments'
+				  otherwise we would be calling commentsForm twice and causing an error
+				*/
+				// we also need to call show on the close button in the 'close' method, going to move this up in the script
+				commentsForm.close.call
+				(commentsForm.comments);
+				/*
+				// version 1: standard syntax
+				commentsForm.comments.show();
+				*/
+				// version 2: calling in object using array notation
+				commentsForm.comments[commentsForm.config.effect]
+				(commentsForm.config.speed);
+
+			},
+
+			// create the 'close' method
+			close: function(){
+				// setting 'this' to the #comments-form <div>
+				var $this = $(this);
+				// creating the close buttom
+				$('<span class="xclose">X</span>')
+				// insert close button
+				.prependTo(this)
+				// hide the form when close button is clicked
+				.on('click', function(){
+					/*
+					// version 1: standard
+					$this.hide();
+					*/
+					/*
+					// version 2: array notation with different effect
+					$this.fadeOut(commentsForm.config.speed);
+					*/
+					// version 3: array notation with default effect
+					$this[commentsForm.config.effect]
+					(commentsForm.config.speed);
+
+					/*
+					  showing below a few techniques for using the console.log() function
+					  firstly demonstrating the use of \n to break to a new line
+					  also showing the '+' character to concatonate content
+					  then showing comma seperated list within the parenthesis
+					*/
+					// concatonation using '+' and the '\' to escape special characters
+					console.log('close button is working\n\n' /* new line then concatonate */ + this + '  is the context of \'this\' within the callback function inside the \'close:\' method inside the commentsForm object');
+					// comma seperated list
+					console.log(this, 'different method to log the context of \'this\' in this location within the script', 'Note: this method logs \'this\' as actual html');
+				});
+			}
+		};
+		/*
+		// version 1: call the first method 'init' (the constructor method) to run the script
+		commentsForm.init();
+		*/
+		// version 2: add flexibility
+		commentsForm.init({
+			effect: 'slideToggle',
+			speed: 500
+		});
+
+	})(); // end shorthand (document).ready(function(){});
+})(jQuery); // end for WordPress files
+</script>
+</body>
+</html>

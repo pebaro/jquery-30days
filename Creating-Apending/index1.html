@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<!-- 
+	Creating and Apending Content
+-->
+<head>
+	<meta charset=utf-8>
+	<title>Creating and Apending Content</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<script src="../jquery-1.12.3.js"></script>
+</head> 
+<body>
+<article class="blog-post">
+	<h1>Creating and Apending Content</h1>
+	
+	<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. Porttitor, pellentesque hendrerit mi vestibulum, gravida morbi ad mi.</p>
+		<blockquote>Ex, mauris erat integer nec, elit tempor sed elit, magna, orci eleifend, nibh nunc, ornare eleifend.</blockquote> 
+	<p>Ultricies nisi elementum placerat porta. Rutrum urna bibendum tincidunt condimentum nunc a, nisi, donec laoreet, in dolor, nullam eros, nostra, vivamus.</p>
+
+	<p>Lorem ipsum dolor sit amet nam. Dapibus fringilla, per leo arcu libero sapien dictumst accumsan elementum lectus dictum ligula, commodo augue amet. Viverra eleifend adipiscing at, pellentesque quam sed, lacinia mauris, justo a, volutpat, bibendum consectetur dui porttitor, fringilla tellus. Maximus feugiat, ligula, ultrices praesent enim, justo mi ullamcorper metus vitae, tellus, leo.</p>
+	
+	<p>Lorem ipsum dolor sit amet arcu, lorem, urna ad varius, nullam quis platea proin posuere. Ligula mattis tortor interdum, euismod sollicitudin sed purus ex volutpat, elementum. Nunc tellus, auctor pharetra porttitor sem, elit, class pulvinar quam, eget finibus luctus ullamcorper efficitur vehicula sapien lacus. Curabitur eget sem, molestie vel, vestibulum. Odio rhoncus, tellus, posuere erat scelerisque ligula, leo, urna dapibus enim, suscipit sem eu. Commodo, metus inceptos dui, amet orci varius, taciti sit dictumst per varius mattis, justo neque nec.</p>
+</article>
+
+<script>
+(function($){
+	(function(){
+		// script 1: .append()
+		// $('article').append('Adding our first piece of content.');
+
+		// script 2: .prepend()
+		// $('article').prepend('Adding our first piece of content.');
+
+		// script 3: .after()
+		// $('h1').after('Adding our first piece of content.');
+
+		// script 4: .first() & .before()
+		// $('p').first().before('Adding our first piece of content.');
+
+		// script 5: .appendTo() adding an html element with content
+		// $('<h2>Adding content within an &lt;h2&gt; tag</h2>').appendTo('article');
+
+		// script 6: .appendTo() using an Object to add the content
+		/* $('<h2></h2>', {
+			text: 'Adding content using an object',
+			class: 'object'
+		}).appendTo('article'); */
+
+		// script 7: .prependTo() using an Object to add the content
+		/* $('<h2></h2>', {
+			text: 'Adding content using an object',
+			class: 'object'
+		}).prependTo('article'); */
+
+		// script 8: .insertAfter() using an Object to add the content
+		/* $('<h2></h2>', {
+			text: 'Adding <h2> content using an object',
+			class: 'object'
+		}).insertAfter('article h1'); */
+
+		// script 9: .insertBefore() using an Object to add the content
+		$('<p></p>', {
+			text: 'Another <p> with content using an object',
+			class: 'object',
+		}).insertBefore('article p:nth-child(6)');
+
+	})();
+})(jQuery);
+</script>
+</body>
+</html>

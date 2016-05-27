@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<!-- 
+	Bind, Live, Delegate
+-->
+<head>
+	<meta charset=utf-8>
+	<title>Delegate</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<script src="../jquery-1.12.3.js"></script>
+</head> 
+<body>
+<div class="container">
+	<h1>Delegate</h1>
+	<p>This was a good choice and got used for a long time</p>
+	<h2>Click Me</h2>
+	<h2>Click Me</h2>
+	<h2>Click Me</h2>
+	<h2>Click Me</h2>
+</div>
+
+<script>
+(function($){
+	(function(){
+
+		// script 1
+		// this was a good choice and got used for a long time
+		// again, no need to pass parameters to .clone() as event handlers were auto cloned
+		$('div.container').delegate('h2', 'click', function(){
+			console.log('An h2 has been clicked!');
+			$(this).clone().appendTo('.container');
+			var cloned = $(this).clone();
+			console.log(cloned);
+		});
+
+	})();
+})(jQuery);
+</script>
+</body>
+</html>

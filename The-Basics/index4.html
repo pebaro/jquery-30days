@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset=utf-8>
+	<title>Chaining</title>
+
+	<style> /* script 1 */
+/*		li { font-weight: bold; color: black; }*/
+/*		ul.bold > li { font-weight: bold; color: red; }*/
+	</style>
+
+	<style> /* script 3 & 4 */
+	li { color: orange; }
+	.black { font-weight: bold; color: #000; }
+	</style>
+
+</head>
+
+<body>
+<div class="container">
+	<h1>Chaining methods with jQuery</h1>
+
+	<p>paragraph of text for the html page</p>
+
+	<ul class="bold">
+		<li>hello 1</li>
+		<li>hello 2</li>
+		<ul>
+			<li>nested list item</li><!-- this is a descendent -->
+		</ul>
+	</ul>
+
+</div>
+
+
+<script src="../jquery-1.12.3.js"></script>
+
+<script>// script 1
+/*
+(function($){
+	$(document).ready(function(){
+		$('ul.bold').children('li')
+			.css({
+				'color':'orange',
+				'font-weight':'bold'
+			});
+	});
+})(jQuery);
+
+console.log( $('ul.bold').children('li').css({'color':'orange', 'font-weight': 'bold'}) );
+*/
+</script>
+
+<script>// script 2
+// .find will continue to find all li items within the ul selected
+/*
+(function($){
+	$(document).ready(function(){
+		$('ul.bold').find('li')
+			.css({
+				'color':'orange',
+				'font-weight':'bold'
+			});
+	});
+})(jQuery);
+*/
+</script>
+
+<script>// script 3
+// we can use all CSS eg first-child or nth-child(1) or use a jQuery method
+/*
+(function($){
+	$(function(){
+		$('ul.bold').find('li:nth-child(2)').addClass('black');
+	});
+})(jQuery);
+*/
+</script>
+
+<script>// script 4
+/* 
+using more complex selectors will give you support for older browsers such as IE6
+
+eg. :first   
+
+it is important to note that if there is a CSS alternative then it is better to use that to take advantage of the native browser rendering 
+*/
+(function($){
+	$(function(){
+		// option 1 gives old browser support
+		// $('ul.bold').children('li:first').addClass('black');
+
+		// option 2 gives old browser support 
+		// eg. .firsst  .next  .prev  .last
+		$('ul.bold').children('li').last().addClass('black');
+
+		// option 3
+		$('ul.bold').children('li:nth-child(1)').text('changing text with jQuery');
+
+		// option 4 uses chaining
+		// NB: this changes the nested li to just a ul with the text
+		$('ul.bold li:nth-child(1)').next().addClass('changing text with jQuery again');
+		//console.log($('ul.bold').children('li').eq(1).next().text('changing text with jQuery again'));
+	}) ;
+})(jQuery);
+</script>
+
+</body>
+
+</html>

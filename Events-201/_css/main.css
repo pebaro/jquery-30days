@@ -1,0 +1,28 @@
+body {
+	font-family: sans-serif;
+}
+.hide { display: none; }
+dl {
+	width: 800px;
+}
+dd {
+	font-weight: normal; font-size: 0.9em; color: rgba(186, 222, 247, 1);
+	margin: 0; padding: 0.5em 1em; background: #555;
+}
+dt {
+	cursor: pointer;
+	font-weight: bold; font-size: 1em;
+	padding: 0.5em 1em; margin: 0;
+	background: #F1F1F1; border-bottom: 1px solid #CCC; border-top: 1px solid white;
+}
+dt:first-child {
+	border-top: none;
+}
+dt:nth-last-child(2) {
+	border-bottom: none;
+}
+
+
+h4.bind {
+	cursor: pointer;
+}

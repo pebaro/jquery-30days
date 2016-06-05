@@ -103,7 +103,7 @@
 				.insertAfter('article.blog-post')
 				// on 'click' we'll call the 'show' method
 				.on('click', this.show); // 'this' = #comments-form
-			}, // end 'init' method (known as 'constructor')
+			}, // end 'init' method (known as 'constructor') added word
 
 			// create 'show' method
 			show: function(){
@@ -119,6 +119,10 @@
 
 				// personal addition
 				cf.backdrop.call();
+				
+				// make h1 and button more visible
+				$('#container h1').addClass('more-visible');
+				$('#container button').attr('disabled', true).addClass('button-backdrop').css('cursor', 'default');
 				
 				
 			}, // end 'show' method
@@ -151,6 +155,10 @@
 
 					// personal addition
 					cf.startpoint.call();
+					
+					// return h1 and button to normal
+					$('#container h1').removeClass('more-visible');
+					$('#container button').attr('disabled', false).removeClass('button-backdrop').css('cursor', 'pointer');
 				});
 			} // end 'close' method
 		};
@@ -164,7 +172,7 @@
 			formShow: 'slideDown',
 			formHide: 'fadeOut',
 			showSpeed: 300,
-			hideSpeed: 300
+			hideSpeed: 600
 		});
 
 	})(); // end shorthand (document).ready(function(){});

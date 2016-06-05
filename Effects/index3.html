@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<!-- Effects -->
+<head>
+	<meta charset=utf-8>
+	<title>Effects</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<script src="../jquery-1.12.3.js"></script>
+</head> 
+<body>
+	<div id="container">
+		<h1>Effects</h1>
+		<article class="blog-post">
+			<h2>Flash Notice</h2>
+			<hr>
+			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. Porttitor, pellentesque hendrerit mi vestibulum, gravida morbi ad mi.</p>
+				<blockquote><span class="opening-blockquote">"</span> Ex, mauris erat integer nec, elit tempor sed elit, magna, orci eleifend, nibh nunc, ornare eleifend.</blockquote> 
+			<p>Ultricies nisi elementum placerat porta. Rutrum urna bibendum tincidunt condimentum nunc a, nisi, donec laoreet, in dolor, nullam eros, nostra, vivamus.</p>
+		</article>
+	</div>
+<script>
+(function($){
+	(function(){
+/* code for a custom jQuery effect from jQuery v1.12.3
+	https://code.jquery.com/jquery-1.12.3.js
+	// starting point:
+	jQuery.fn[ name ] = function( speed, easing, callback ) {
+		return this.animate( props, speed, easing, callback );
+	};
+*/
+/*		
+Script 1: executes the starting point of a custom effect
+next we need to implement the creation
+		
+		// hide the flash notice blog post
+		$('article.blog-post').hide();
+		// log what's happening to the console
+		console.log('hiding flash notice blog post', $('article.blog-post').hide());
+		
+		// setup custom affect
+        jQuery.fn.flash = function( speed, easing, callback ) {
+           // return this.animate( props, speed, easing, callback );
+		   $(this).fadeIn(300);
+		   // log what's happening to the console
+           console.log('test flash affect starting point', $('article.blog-post'));
+        };
+		
+		// test custom affect and log to console
+		$('h1').on('click', function(){
+			$(this).next('article.blog-post').flash();
+		});e*/
+/*
+Script 2: the effect is working, we should clean the code 
+lets do so
+		// hide the flash notice blog post
+		$('article.blog-post').hide();
+		// log what's happening to the console
+		console.log('hiding flash notice blog post', $('article.blog-post').hide());
+		
+		// setup custom affect
+        jQuery.fn.flash = function( speed, easing, callback ) {
+           // return this.animate( props, speed, easing, callback );
+		   $(this).fadeIn(500, function(){
+			   // now log what's happening once the affect has finished
+			   console.log('flash affect starting point', $('article.blog-post'));
+			   
+			   // now we're going to use .delay() to complete
+			   $(this).delay(4000).fadeOut(500, function(){
+				   console.log('flash affect end point', $('article.blog-post'));
+			   });
+		   });
+        };
+		
+		// test custom affect and log to console
+		$('h1').on('click', function(){
+			$(this).next('article.blog-post').flash();
+		});
+*/
+// Script 3: final version of custom effect called 'flash'
+		// cache article.blog-post
+		var article = $('article.blog-post');
+		// hide the 'flash' notice
+		article.hide();
+		// log what's happening to the console
+		console.log('hiding flash notice', article.hide());
+		
+		// setup of custom effect 'flash'
+        jQuery.fn.flash = function( speed, easing, callback ) {
+			// cache $(this)
+			var $this = $(this);
+			
+			// step 1: I've chained 3 effects rather than a single effect
+			return $this.fadeIn(200).fadeOut(200).slideDown(600, function(){
+				// I'm logging what's just happened in the console
+				console.log('flash effect start point', article);
+				// step 2: I'm going to use .delay() to complete the effect
+				return $this.delay(4000).fadeOut(200).fadeIn(200).slideUp(800, function(){
+					// I'm logging what's just happened in the console
+					console.log('flash effect end point', article);
+				});
+			});
+		};
+		// test custom effect and log the results to the console
+		$('h1').on('click', function(){
+			// cache $(this)
+			var $this = $(this);
+			// make DOM traversal fail-safe by replacing .next with variable
+			article.flash();
+		});
+	})();
+})(jQuery);
+</script>
+</body>
+</html>

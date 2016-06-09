@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<!-- Animate -->
+<head>
+	<meta charset=utf-8>
+	<title>Animate</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<script src="../jquery-1.12.3.js"></script>
+</head> 
+<body>
+	<div id="container">
+		<h1>Animate</h1>
+		
+		<article class="blog-post">
+			<h2>Placeholder for Animate Tutorials</h2>
+			<hr>
+			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. Porttitor, pellentesque hendrerit mi vestibulum, gravida morbi ad mi.</p>
+				<blockquote><span class="opening-blockquote">"</span> Ex, mauris erat integer nec, elit tempor sed elit, magna, orci eleifend, nibh nunc, ornare eleifend.</blockquote> 
+			<p>Ultricies nisi elementum placerat porta. Rutrum urna bibendum tincidunt condimentum nunc a, nisi, donec laoreet, in dolor, nullam eros, nostra, vivamus.</p>
+		</article>
+
+		<button class="increase">increase</button>
+	</div>
+<script>
+(function($){
+	(function(){
+/* script 1: this is the old way of doing things
+		var increase = $('button.increase'),
+			post = $('article.blog-post'),
+			fsize = parseInt(post.css('font-size'), 10);
+		
+		// check that string is converted to integar
+		console.log(fsize + ' ' + typeof fsize + '\n');
+
+		increase.on('click', function(){
+			post.css( 'font-size', fsize += 5 );
+		});
+		// check what's happening
+		console.log( increase.on('click', function(){
+			fsize + ' ' + typeof fsize;
+		}) );
+*/
+/* script 2: this is using the new syntax/way of doing the same thing
+		var increase = $('button.increase'),
+			post = $('article.blog-post');
+
+		// let's make it relative
+		increase.on('click', function(){
+			post.css( 'font-size', '+=2' );
+		});
+*/
+// script 3: switch out .css for .animate
+		var increase = $('button.increase'),
+			post = $('article.blog-post');
+
+		// let's make it relative
+		increase.on('click', function(){
+			post.animate({
+				'fontSize':'+=5',
+				'width':'+=100'
+			}, 5000, 'swing', function(){
+				alert('animation complete!');
+			});
+		});
+
+	})();
+})(jQuery);
+</script>
+</body>
+</html>

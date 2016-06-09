@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<!-- 
+	now we're goinng to explain some theory before building a stylesheet selector
+-->
+<head>
+	<meta charset=utf-8>
+	<title>jQuery Events</title>
+	<link rel="stylesheet" href="_css/main.css">
+	<link rel="stylesheet" href="_css/day.css">
+</head>
+<body>
+<div class="container">
+	<h1>Stylesheet Selector</h1>
+
+	<p class="opening">This is our opening paragraph of text</p>
+
+	<button>Day</button>
+	<button>Night</button>
+
+</div>
+
+<script src="../jquery-1.12.3.js"></script>
+
+<script>
+(function($){
+/* // script 1: when a button is clicked it's logged to the console
+	(function(){
+		$('button').click(function(){
+			console.log('button was clicked');
+		});
+	})();
+*/
+/* // script 2: difference between logging this and $(this)
+	(function(){ 
+		$('button').click(function(){
+			console.log(this);
+			console.log($(this));
+		});
+	})();
+*/
+/* // script 3: 
+	(function(){ 
+		$('button').click(function(){
+			$(this).text('changed button text');
+		});
+	})();
+*/
+// script 4: using chaching to improve performance 
+	(function(){ 
+
+		var btn = $('button');
+		btn.on('click', function(){
+
+			var $this = $(this);
+			$this.text('changed button text');
+		});
+
+	})();
+})(jQuery);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<!-- 
+	let's optimise the code as much as possible, remember .click is a convenience method, it's more direct to use .on('click', etc...)
+	othere convenience methods would be things like .change, .hover, etc.
+	I've also included an extra conditions to give additional changes to the buttons based on stylesheet selection
+-->
+<head>
+	<meta charset=utf-8>
+	<title>jQuery Events Optimised</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<link class="style-change" rel="stylesheet" type="text/css" href="_css/day.css">
+</head> 
+<body>
+<div class="container">
+	<h1>Stylesheet Selector</h1>
+	<p class="opening">This is our opening paragraph of text</p>
+	<div class="btns">
+		<button data-file="day">Day</button>
+		<button data-file="night">Night</button>
+	</div>
+</div>
+
+<script src="../jquery-1.12.3.js"></script>
+<script>
+(function($){
+	(function(){
+		var btn = $('button');
+
+		btn.on('click', function(){
+
+			// cache elements
+			var $this 	= $(this),
+				link 	= $('link.style-change'),
+				time 	= $this.attr('data-file'),
+				folder 	= '_css/';
+
+			$this.siblings(btn).removeAttr('disabled');
+
+			link.attr('href', folder + time + '.css');
+
+			$this.attr('disabled', true);
+/* 
+	// conditions 2
+	// this changes border colors as well as background colors depending on stylesheet
+	// could remove the .css and use another class in the addClass list to shorten
+*/
+			var styleChange = $('link.style-change').attr('href');
+
+			if(styleChange === '_css/day.css'){
+
+				$this.css('cursor','default').removeClass('night-border').addClass('btn-day day-border');
+				$this.siblings(btn).css('cursor','pointer').removeClass('btn-night');
+
+			}
+			else if(styleChange === '_css/night.css'){
+
+				$this.css('cursor','default').addClass('btn-night');
+				$this.siblings(btn).css('cursor','pointer').removeClass('btn-day day-border').addClass('night-border');
+
+			}
+
+			// check to make sure only the events you want are taking place
+			console.log(time);
+
+/* 
+	// conditions 1
+			if($this.attr('disabled', true)){
+				$this.css('cursor','default').addClass('btn-black');
+				$this.siblings(btn).css('cursor','pointer').removeClass('btn-black');
+			}
+*/
+		});
+	})();
+})(jQuery);
+</script>
+</body>
+</html>

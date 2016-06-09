@@ -1,0 +1,25 @@
+body {
+	font-family: sans-serif;
+}
+button {
+	padding: 5px 15px;
+	margin: 20px 25px 20px 0;
+	background-color: #666;
+	color: white; font-size: .8em; font-weight: normal; text-transform: uppercase;
+	border: 1px solid #000; border-radius: 4px;
+	cursor: pointer;
+}
+.btn-day {
+	background-color: #222; 
+	color: orange;
+}
+.day-border {
+	border: 1px solid orange;
+}
+.btn-night {
+	background-color: #222; border: 1px solid #91C4E2;
+	color: #91C4E2;
+}
+.night-border {
+	border: 1px solid black;
+}

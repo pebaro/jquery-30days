@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<!-- 
+	let's look at some alternative methods
+	html5 data attribute used on the <button> is one alternative
+-->
+<head>
+	<meta charset=utf-8>
+	<title>jQuery Events</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<link rel="stylesheet" type="text/css" href="_css/day.css" class="style-change">
+</head> 
+<body>
+<div class="container">
+	<h1>Stylesheet Selector</h1>
+
+	<p class="opening">This is our opening paragraph of text</p>
+
+	<button data-file="day">Day</button>
+	<button data-file="night">Night</button>
+ 
+</div>
+
+<script src="../jquery-1.12.3.js"></script>
+
+<script>
+(function($){
+// script 1: data attribute method
+	(function(){
+		$('button').click(function(){
+
+			var link = $('link.style-change');
+			var time = $(this).attr('data-file');
+			var folder = '_css/';
+
+			console.log(time);
+
+			link.attr('href', folder + time + '.css');
+		});
+	})();
+})(jQuery);
+
+</script>
+</body>
+</html>

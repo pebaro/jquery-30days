@@ -136,9 +136,9 @@ button:focus {
     outline:none;
 }
 .button-backdrop {
-	background: #666 !important;
-	border: 1px solid #999 !important;
-	color: #ccc !important;
+	background: #777 !important;
+	border: 1px solid #000 !important;
+	color: #222 !important;
 }
 input:focus {
     outline:1px solid #7DECF8;
@@ -155,15 +155,19 @@ textarea:focus {
 	color: #7DECF8;
 }
 
+#name {
+
+}
+
 span.xclose {
 	background: #F9F1D2; display: block;
-	color: #000; font-weight: bold; font-size: 0.95em;
+	color: #333; font-weight: bold; font-size: 0.95em;
 	position: absolute;
 	top: 35px;
 	right: 50px;
 	cursor: pointer;
 	padding: 6px 10px;
-	border: 1px dotted #F9F1D2; border-radius: 2px;
+	border: 1px dotted #F9F1D2; border-radius: 1px;
 	-webkit-transition: all 0.8s ease;
 	-moz-transition: all 0.8s ease;
 	-ms-transition: all 0.8s ease;
@@ -173,5 +177,6 @@ span.xclose {
 span.xclose:hover {
 	background: #222;
 	color: #F9F1D2;
-	border: 1px dotted #F9F1D2;
+	border: 1px dashed #F9F1D2;
+	border-radius: 50%;
 }

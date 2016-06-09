@@ -20,7 +20,7 @@
 			<p>Ultricies nisi elementum placerat porta. Rutrum urna bibendum tincidunt condimentum nunc a, nisi, donec laoreet, in dolor, nullam eros, nostra, vivamus. <span class="call-out">Maximus velit ultrices vitae, lorem.</span></p>
 			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac.</p>
 			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. <span class="call-out">Porttitor, pellentesque</span> mi vestibulum, gravida morbi ad mi.</p>
-		</article>
+		</article> <!-- end .blog-post -->
 
 		<div id="comments-form">
 			<form action="#">
@@ -28,29 +28,31 @@
 				<ul>
 					<li>
 						<label for="name">Name: </label>
-						<input type="text" id="name" name="name">
+						<input type="text" id="name" name="name" tabindex="1">
 					</li>
 					<li>
 						<label for="email">Email: </label>
-						<input type="email" id="email" name="email">
+						<input type="email" id="email" name="email" tabindex="2">
 					</li>
 					<li>
 						<label for="comments">Comments: </label>
-						<textarea type="text" id="comments" name="comments" rows="8"></textarea>
+						<textarea type="text" id="comments" name="comments" rows="8" tabindex="3"></textarea>
 					</li>
 					<li>
-						<input type="submit" value="Submit Comments">
+						<input type="submit" value="Submit Comments" tabindex="4">
 					</li>
 				</ul>
 			</form>
-		</div>
+		</div> <!-- end #comments-form -->
 
-	</div>
+	</div> <!-- end #container -->
 <script>
 (function($){ // for use in WordPress files
 	(function(){ // shorthand (document).ready(function(){});
 	
-		/* script: blog post style of html using '.call-out' class */
+		// script: blog post style of html using '.call-out' class
+		// =======================================================
+
 		// set an event for '.each' occurance of '.call-out' class
 		var callOut = $('.call-out').each(function(){ 
 			// create a <blockquote>, use an object to fill the content
@@ -63,16 +65,19 @@
 			//console.log(this); /* 'this' works as eg within object contents but see difference in console */
 		});
 
+
+		// script: this script is the meat of what's going on
+		// ==================================================
+		
 		/* form script: refactored index4.html */
 		$('html').addClass('js'); // add jQuery to page
 		// create parent object attached to '#comments-form'
 		var commentsForm = {
 
-			// technique for creating variable within an object
+			// creation of variable within an object
 			comments: $('#comments-form'), // #comments-form
 
-
-			// adding the next two methods just to pull in a backdrop when form opens etc
+			// adding the next two methods to pull in lightbox style effect when form is opened
 			backdrop: function(){
 					$('html').addClass('backdrop');
 			},
@@ -80,13 +85,14 @@
 				$('html').removeClass('backdrop');
 			},
 			
-			// object for user modifictions of effects
+			// FOR THE DEVELOPER TO USE: 
+			// the 'config' method is for the developer to modify effects if desired
 			config: {
 				formShow: 'fadeIn',
 				formHide: 'fadeOut',
 				showSpeed: 500,
 				hideSpeed: 250,
-				//log: console.log(this) /* demo of 'this' */
+				//log: console.log(this) /* demo of 'this' within this method */
 			}, // end 'config' object
 				
 			// pass the 'config' object to '.extend' the script
@@ -122,7 +128,7 @@
 				
 				// make h1 and button more visible
 				$('#container h1').addClass('more-visible');
-				$('#container button').attr('disabled', true).addClass('button-backdrop').css('cursor', 'default');
+				$('#container button').attr('disabled', true).addClass('button-backdrop').css('cursor', 'crosshair');
 				
 				
 			}, // end 'show' method
@@ -162,17 +168,17 @@
 				});
 			} // end 'close' method
 		};
-		/*
-		  call first method 'init' (the constructor method) 
-		  run the script commentsForm.init();
-		  add more flexibility to user adjustable effects
+		/* the process the script goes through:
+		  1: call first method 'init' (the constructor method) 
+		  2: run the script commentsForm.init();
+		  3: add more flexibility to user adjustable effects
 		*/
 		commentsForm.init({
 			// comment out lines to use defaults
 			formShow: 'slideDown',
-			formHide: 'fadeOut',
-			showSpeed: 300,
-			hideSpeed: 600
+			formHide: 'slideUp',
+			showSpeed: 400,
+			hideSpeed: 200
 		});
 
 	})(); // end shorthand (document).ready(function(){});

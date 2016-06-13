@@ -54,12 +54,61 @@
 
 	</div>
 <script>
-	// Global variables should be written here outside of the "docready" self-invoking function
-
+// Global variables should be written here reaad API for more info
 (function($){ // *1: for WordPress etc.
 	(function(){ // *2: shorthand (document).ready(function(){});
 
-		// write your code starting here
+		// script for article with .js applied
+		$('html').addClass('js'); // add jQuery to page
+
+		var callOut = $('.call-out').each(function(){ 
+			// create a <blockquote>, use an object to fill the content
+			$('<blockquote></blockquote>', {
+				class: 'call-out',
+				text: $(this).text(),
+				//log: console.log(this) // demos 'this' keyword
+			// set position of '.each' occurance	
+			}).prependTo($(this).closest('p'));
+			//console.log(this); /* 'this' works as eg within object contents but see difference in console */
+		});
+
+		// start 'comments' object
+		var comments = {
+
+			// cache #container
+			container: $('#container'),
+
+			// constructor method
+			init: function(){
+				$('<button></button>', {
+					text: 'Send Comments'
+				}).insertAfter('article.blog-post').on('click', this.show);
+			},
+
+			// show method
+			show: function(){
+				comments.close.call(comments.container);
+				comments.container.show();
+				console.log('showing'); // 'click', this.show
+
+			},
+
+			// close method
+			close: function(){
+				var $this = $(this); // #container
+
+				$('<span class=xclose></span>').prependTo(this)
+				.on('click', function(){
+					$this.hide();
+				});
+			}
+			
+		} // end 'comments' object
+
+		// run object
+		comments.init();
+
+
 
 	})(); // *1: end shorthand
 })(jQuery); // *2: end for WordPress

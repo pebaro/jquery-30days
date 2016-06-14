@@ -161,11 +161,6 @@ textarea:focus {
     box-sizing: border-box;
 	color: #7DECF8;
 }
-
-#name {
-
-}
-
 span.xclose {
 	background: #F9F1D2; display: block;
 	color: #333; font-weight: bold; font-size: 0.95em;

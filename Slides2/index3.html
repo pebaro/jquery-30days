@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<!-- from memory...
+	 chapter on Slides & Structures
+ -->
+<head>
+	<meta charset=utf-8>
+	<title>Slides & Structure</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<script src="../jquery-1.12.3.js"></script>
+</head> 
+<body>
+	<div id="container">
+		<h1>Object Oriented jQuery</h1>
+
+		<article class="blog-post">
+			<h2>Revision Blog Post</h2>
+			<hr>
+			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. Porttitor, pellentesque hendrerit mi vestibulum, gravida morbi ad mi.</p>
+				<blockquote>Ex, mauris erat integer nec, elit tempor sed elit, magna, orci eleifend, nibh nunc, ornare eleifend.</blockquote> 
+			<p>Ultricies nisi elementum placerat porta. Rutrum urna bibendum tincidunt condimentum nunc a, nisi, donec laoreet, in dolor, nullam eros, nostra, vivamus. <span class="call-out">Maximus velit ultrices vitae, lorem.</span></p>
+			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac.</p>
+		</article>
+
+		<div id="comments-form">
+			<form action="#">
+				<h2 class="form-heading">Comments Form</h2>
+				<ul>
+					<li>
+						<label for="name">Name: </label>
+						<input type="text" id="name" name="name">
+					</li>
+					<li>
+						<label for="email">Email: </label>
+						<input type="email" id="email" name="email">
+					</li>
+					<li>
+						<label for="comments">Comments: </label>
+						<textarea type="text" id="comments" name="comments" rows="8"></textarea>
+					</li>
+					<li>
+						<input type="submit" value="Submit Comments">
+					</li>
+				</ul>
+			</form>
+		</div>
+	</div>
+<script>
+// Global variables should be written here reaad API for more info
+(function($){ // *1: for WordPress etc.
+	(function(){ // *2: shorthand (document).ready(function(){});
+
+		// creating js hook
+		$('html').addClass('js');
+
+		// object: callOuts
+		var callOut = $('.call-out').each(function(){ 
+			// create a <blockquote>, use an object to fill the content
+			$('<blockquote></blockquote>', {
+				class: 'call-out',
+				text: $(this).text(),
+				//log: console.log(this) // demos 'this' keyword
+			// set position of '.each' when it occurs
+			}).prependTo($(this).closest('p'));
+			//console.log(this); /* 'this' works as eg within object contents but see difference in console */
+		});
+
+		var commentsForm = { // the main object
+
+			form: $('div#comments-form'),
+
+			// method: config (for developers to set effects)
+			config: {
+				showForm: 'fadeIn',
+				hideForm: 'fadeOut',
+				showSpeed: 300,
+				hideSpeed: 300
+			},
+
+			// method: init (commonly know as constructor)
+			init: function(config){ // pass in the config method
+
+				$.extend(this.config, config); // use jQuery .extend function
+
+				console.log(this);
+
+				$('<button></button>', {
+					class: 'your-comments',
+					text: 'Your Comments'
+				})
+					.insertAfter('article.blog-post')
+					.on('click', this.show);
+			},
+			// method: show
+			show: function(){
+				var $this = $(this);
+
+				// console demos
+				console.log(this);
+				console.log('Your Comments button has been clicked!!!');
+
+				commentsForm.close.call(commentsForm.form); // call close method
+
+				commentsForm.form[commentsForm.config.showForm](commentsForm.config.showSpeed); // show form 
+			},
+			// method: close
+			close: function(){
+				console.log(this);
+
+				// cache the form 
+				var $this = $(this);
+
+				if($('span.xclose').length) return;
+
+				$('<span></span>', {
+					class: 'xclose',
+					text: 'X'
+				})
+					.prependTo(this)
+					.on('click', function(){
+						$this[commentsForm.config.hideForm](commentsForm.config.hideSpeed);
+					})
+			}
+		};
+
+		commentsForm.init({
+			showForm: 'slideDown',
+			hideForm: 'slideUp',
+			showSpeed: 600,
+			hideSpeed: 100
+		});
+
+	})(); // *1: end shorthand
+})(jQuery); // *2: end for WordPress
+</script>
+</body>
+</html>

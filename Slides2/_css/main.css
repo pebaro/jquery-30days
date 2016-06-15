@@ -136,7 +136,15 @@ input[type="submit"]:hover {
     color: #000 !important;
 }
 input[type="submit"]:focus {
-    outline:none; color: #F9F1D2;
+    color: #F9F1D2;
+    outline:1px solid #000;
+    font-weight: bold;
+    border-radius: 0;
+	-webkit-transition: all 0.8s ease;
+	-moz-transition: all 0.8s ease;
+	-ms-transition: all 0.8s ease;
+	-o-transition: all 0.8s ease;
+	transition: all 0.8s ease;
 }
 button {
 	width: auto; background: transparent; 
@@ -161,7 +169,9 @@ button:hover {
 button:focus {
     outline:none;
 }
-
+.disabled {
+    cursor: crosshair;
+}
 input:focus {
     outline:1px solid #f8c87d;
     -webkit-box-sizing: border-box;
@@ -188,11 +198,7 @@ span.xclose {
 	cursor: pointer;
 	padding: 6px 10px;
 	border: 1px dotted #fff; 
-	border-radius: 50%;
-	-webkit-border-radius: 50%;
-	-moz-border-radius: 50%;
-	-ms-border-radius: 50%;
-	-o-border-radius: 50%;
+	border-radius: 1px;
 	-webkit-transition: all 0.8s ease;
 	-moz-transition: all 0.8s ease;
 	-ms-transition: all 0.8s ease;

@@ -74,10 +74,10 @@
             form: $('#comments-form'), // cache #comments-form
 
             config: { // method for developer config options
-                showForm: 'slideDown',
-                hideForm: 'slideUp',
-                showSpeed: '500',
-                hideSpeed: '500'
+                showForm: 'fadeIn',
+                hideForm: 'fadeOut',
+                showing: 500,
+                hiding: 500
             },
 
             init: function(config){ // constructor method
@@ -99,7 +99,7 @@
 
                 // show the form AND .call the close button
                 commentsForm.close.call(commentsForm.form); // using .call() function
-                commentsForm.form[commentsForm.config.showForm](commentsForm.config.showSpeed);
+                commentsForm.form[commentsForm.config.showForm](commentsForm.config.showing);
             },
 
             close: function(){ // method that closes form
@@ -109,7 +109,7 @@
                 $('<span class=xclose>X</span>') // create close button
                     .prependTo(this) // place button in the DOM
                     .on('click', function(){ // trigger closing of form
-                        $this[commentsForm.config.hideForm](commentsForm.config.hideSpeed);
+                        $this[commentsForm.config.hideForm](commentsForm.config.hiding);
                     })
             }
 
@@ -117,8 +117,8 @@
         commentsForm.init({
 			showForm: 'slideDown',
 			hideForm: 'slideUp',
-			showSpeed: '2000',
-			hideSpeed: '500'
+			showing: 1000,
+			hiding: 200
 		});
 
 

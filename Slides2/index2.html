@@ -1,18 +1,12 @@
 <!doctype html>
 <html>
-<!-- notes on how/why this file was created...
-	This is done from memory to check on what I've learnt so far
-	Please do the same: 
-	When you've completed the lesson on "Slides & Structures" 
-	see how much you can do from memory, without having to refer back 
-	Best of luck!!! :-)
-	ps. I wouldn't bother recreating the structural CSS as you want to test
-	your aquired knkowledge of jQuery not CSS
+<!-- revision session on Slides & Structure...
+	 final refactored code for performance and readability
  -->
 <head>
 	<meta charset=utf-8>
 	<title>Slides & Structure</title>
-	<link rel="stylesheet" type="text/css" href="_css/main5.css">
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
 	<script src="../jquery-1.12.3.js"></script>
 </head> 
 <body>
@@ -20,13 +14,14 @@
 		<h1>Object Oriented jQuery</h1>
 
 		<article class="blog-post">
-			<h2>Learning Test Blog Post</h2>
+			<h2>Revision Blog Post</h2>
 			<hr>
 			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. Porttitor, pellentesque hendrerit mi vestibulum, gravida morbi ad mi.</p>
 				<blockquote>Ex, mauris erat integer nec, elit tempor sed elit, magna, orci eleifend, nibh nunc, ornare eleifend.</blockquote> 
 			<p>Ultricies nisi elementum placerat porta. Rutrum urna bibendum tincidunt condimentum nunc a, nisi, donec laoreet, in dolor, nullam eros, nostra, vivamus. <span class="call-out">Maximus velit ultrices vitae, lorem.</span></p>
 			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac.</p>
 			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. <span class="call-out">Porttitor, pellentesque</span> mi vestibulum, gravida morbi ad mi.</p>
+            <p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. Porttitor, pellentesque hendrerit mi vestibulum, gravida morbi ad mi.</p>
 		</article>
 
 		<div id="comments-form">
@@ -51,63 +46,90 @@
 				</ul>
 			</form>
 		</div>
-
 	</div>
 <script>
 // Global variables should be written here reaad API for more info
 (function($){ // *1: for WordPress etc.
 	(function(){ // *2: shorthand (document).ready(function(){});
 
-		// script for article with .js applied
-		$('html').addClass('js'); // add jQuery to page
+		// creating js hook
+		$('html').addClass('js');
 
+		// object: callOuts
 		var callOut = $('.call-out').each(function(){ 
 			// create a <blockquote>, use an object to fill the content
 			$('<blockquote></blockquote>', {
 				class: 'call-out',
 				text: $(this).text(),
 				//log: console.log(this) // demos 'this' keyword
-			// set position of '.each' occurance	
+			// set position of '.each' when it occurs
 			}).prependTo($(this).closest('p'));
 			//console.log(this); /* 'this' works as eg within object contents but see difference in console */
 		});
 
-		// start 'comments' object
-		var comments = {
+		var commentsForm = { // the main object that shows/hides form`
 
-			// cache #container
-			container: $('#container'),
+			form: $('#comments-form'), // cache #comments-form
 
-			// constructor method
-			init: function(){
-				$('<button></button>', {
-					text: 'Send Comments'
-				}).insertAfter('article.blog-post').on('click', this.show);
+			config: { // method for developer config options
+				showForm: 'fadeIn',
+				hideForm: 'fadeOut',
+				showing: 500,
+				hiding: 500
 			},
 
-			// show method
-			show: function(){
-				comments.close.call(comments.container);
-				comments.container.show();
-				console.log('showing'); // 'click', this.show
+			init: function(config){ // constructor method
+				/* 	// verify 'this' in context
+					console.log(this); */
 
+				$.extend(this.config, config); // .extend() uses config method
+
+				$('<button></button', { // create button
+					text: 'Your Comments' // use an object to create button content
+				})
+					.insertAfter('article.blog-post') // place button in the DOM
+						.on('click', this.show); // show the form when button is clicked
 			},
 
-			// close method
-			close: function(){
-				var $this = $(this); // #container
+			show: function(){ // method that shows form
+				/* // test 'show' method is being called using console
+				console.log('shown after click'); */
 
-				$('<span class=xclose></span>').prependTo(this)
-				.on('click', function(){
-					$this.hide();
-				});
+				// variables for performance & cleanup
+				var cF = commentsForm,
+					fm = cF.form,
+					cfg = cF.config;
+				
+				// add protection in case form is displayed already
+				if(fm.is(':hidden')){
+					// show the form AND .call the close button
+					cF.close.call(fm); // using .call() to create close button
+					fm[cfg.showForm](cfg.showing); // show form
+				}
+			},
+
+			close: function(){ // method that closes form
+				/* 	bind 'this' to #comments-form &
+					variable for performance & cleanup */
+				var $this = $(this),
+				cfg = commentsForm.config;
+
+				if($this.find('span.xclose').length) return;
+
+				$('<span class=xclose>X</span>') // create close button
+					.prependTo(this) // place button in the DOM
+						.on('click', function(){ // trigger closing of form
+							$this[cfg.hideForm](cfg.hiding); // hide form
+						})
 			}
-			
-		} // end 'comments' object
 
-		// run object
-		comments.init();
-
+		};
+		commentsForm.init({
+			showForm: 'slideDown',
+			hideForm: 'slideUp',
+			showing: 600,
+			hiding: 200
+		});
 
 
 	})(); // *1: end shorthand

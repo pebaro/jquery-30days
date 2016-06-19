@@ -9,8 +9,14 @@ html {
 }
 
 body {
-	font-family: sans-serif; text-align: left;
-    background: rgba(0,0,0,0); 
+	font-family: sans-serif; 
+	background: rgba(0,0,0,0); 
+	text-align: left;
+}
+.backdrop {
+	background: rgba(0,0,0,0.8);
+	position: relative;
+	z-index: 1;
 }
 #container { 
 	margin: 0 auto; width: 60%; position: relative;
@@ -63,10 +69,9 @@ blockquote.call-out {
     font-weight: bold;
 	max-width: 150px;
 	border:1px solid rgba(60, 41, 7, 0.25); 
-    border-left: none;
-	border-top-right-radius: 8px;
-	border-bottom-right-radius: 8px;
-	padding: 0.5em 1em; 
+    border-right: none;
+	border-left:1px dashed rgba(60, 41, 7, 0.15); 
+	padding: 0.5em 0 0.5em 1em; 
     margin: 5px 0 10px 20px !important;
 }
 
@@ -94,13 +99,16 @@ ul, li {
 label {
 	display: block; color: #F1C067; 
     font-size: 0.6em; font-weight: normal;
-	clear: both;
+	clear: both; width: 100%;
+	cursor: pointer;
 }
 input, textarea {
 	margin: 2px 0 20px;
-	width: 75%;
+	/*width: 75%;*/
 }
 input { width: 65%; } 
+input:focus { width: 71% !important; }
+textarea:focus { width: 85% !important; }
 textarea { width: 80%; }
 input, textarea {
 	margin: 2px 40px 20px 0; 
@@ -119,7 +127,7 @@ input[type="submit"] {
 	width: auto; background: none; 
 	padding: 10px 20px;
 	border: 1px solid #F9F1D2; 
-    border-radius: 4px;
+    border-radius: 8px;
 	font-weight: bold; color: #F9F1D2; 
     font-size: 0.7em;
 	cursor: pointer;
@@ -145,12 +153,13 @@ input[type="submit"]:focus {
 	-ms-transition: all 0.8s ease;
 	-o-transition: all 0.8s ease;
 	transition: all 0.8s ease;
+	width: auto !important;
 }
 button {
 	width: auto; background: transparent; 
     padding: 10px 20px; margin: 30px 0;
 	border: 1px solid #8E5F0A; 
-    border-radius: 5px;
+    border-radius: 8px;
 	font-weight: bold; color: #8E5F0A; 
     font-size: 0.7em;
 	cursor: pointer;
@@ -169,6 +178,13 @@ button:hover {
 button:focus {
     outline:none;
 }
+.button-backdrop {
+	background: #777 !important;
+	border: 1px solid #000 !important;
+	color: #222 !important;
+    cursor: crosshair;
+}
+
 .disabled {
     cursor: crosshair;
 }
@@ -208,11 +224,44 @@ span.xclose {
 span.xclose:hover {
 	background: none !important;
 	color: #F9F1D2;
-	border: 1px solid #fff;
+	border: 1px solid #fff !important;
 	border-radius: 50%;
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;
 	-ms-border-radius: 50%;
 	-o-border-radius: 50%;
     box-sizing: border-box;
+}
+span.xclose:focus {
+    font-size: 1.05em;
+	padding: 8px 12px 7px;
+	top: 23px; right: 47px;
+    outline:2px solid #FFF;
+	outline-style: inherit;
+	border-radius: 50%;
+	border: 1px dotted #FFF;
+	background: #333;
+	-webkit-transition: all 0.8s ease;
+	-moz-transition: all 0.8s ease;
+	-ms-transition: all 0.8s ease;
+	-o-transition: all 0.8s ease;
+	transition: all 0.8s ease;
+	color: #FFF;
+}
+span.xclose:focus:hover {
+	background: #F9F1D2; 
+    display: block;
+	color: #FFF; font-weight: bold; 
+    font-size: 0.95em;
+	position: absolute;
+	top: 35px; right: 50px;
+	cursor: pointer;
+	padding: 6px 10px;
+	border: 1px dotted #fff; 
+	border-radius: 1px;
+	-webkit-transition: all 0.8s ease;
+	-moz-transition: all 0.8s ease;
+	-ms-transition: all 0.8s ease;
+	-o-transition: all 0.8s ease;
+	transition: all 0.8s ease;
 }

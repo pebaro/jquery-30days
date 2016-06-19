@@ -13,13 +13,15 @@
 		<h1>Object Oriented jQuery</h1>
 
 		<article class="blog-post">
-			<h2>First Blog Post</h2>
+			<h2>Blog Post</h2>
 			<hr>
 			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. Porttitor, pellentesque hendrerit mi vestibulum, gravida morbi ad mi.</p>
 				<blockquote>Ex, mauris erat integer nec, elit tempor sed elit, magna, orci eleifend, nibh nunc, ornare eleifend.</blockquote> 
+			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. Porttitor, pellentesque hendrerit mi vestibulum, gravida morbi ad mi.</p>
 			<p>Ultricies nisi elementum placerat porta. Rutrum urna bibendum tincidunt condimentum nunc a, nisi, donec laoreet, in dolor, nullam eros, nostra, vivamus. <span class="call-out">Maximus velit ultrices vitae, lorem.</span></p>
 			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac.</p>
-			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. <span class="call-out">Porttitor, pellentesque</span> mi vestibulum, gravida morbi ad mi.</p>
+			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac. Porttitor, pellentesque hendrerit mi vestibulum, gravida morbi ad mi.</p>
+			<p>Lorem ipsum dolor sit amet curabitur tortor lorem, faucibus vivamus ligula, platea nostra, dui, ac.  <span class="call-out">Porttitor, pellentesque</span> mi vestibulum, gravida morbi ad mi.</p>
 		</article> <!-- end .blog-post -->
 
 		<div id="comments-form">
@@ -52,7 +54,6 @@
 	
 		// script: blog post style of html using '.call-out' class
 		// =======================================================
-		//
 		// set an event for '.each' occurance of '.call-out' class
 		var callOut = $('.call-out').each(function(){ 
 			// create a <blockquote>, use an object to fill the content
@@ -68,7 +69,6 @@
 
 		// script: this script is the meat of what's going on
 		// ==================================================
-		//
 		/* form script: refactored index4.html */
 		$('html').addClass('js'); // add jQuery to page
 		// create parent object attached to '#comments-form'
@@ -79,8 +79,15 @@
 
 			// adding the next two methods to pull in lightbox style effect when form is opened
 			backdrop: function(){
-					$('html').addClass('backdrop');
+				$('html').addClass('backdrop');
+
+				$('#container h1').addClass('more-visible');
+
+				$('#container button')
+					.attr('disabled', true)
+					.addClass('button-backdrop');
 			},
+
 			startpoint: function(){
 				$('html').removeClass('backdrop');
 			},
@@ -94,22 +101,22 @@
 				hideSpeed: 250,
 				//log: console.log(this) /* demo of 'this' within this method */
 			}, // end 'config' object
-				
-			// pass the 'config' object to '.extend' the script
-			init: function(config){
+
+			init: function(config){ // pass the 'config' object to '.extend'
+
+				commentsForm.startpoint();
+
 				// first paramenter: 'this.config'
 				// second paremeter after the comma: 'config'
 				$.extend(this.config, config);
 				
 				// fill button using object notation
 				$('<button></button>', {
-					text: 'Send Us Your Comments'
+					text: 'Comment on Post'
 				})
-				// insert button after <article>
-				.insertAfter('article.blog-post')
-				// on 'click' we'll call the 'show' method
-				.on('click', this.show); // 'this' = #comments-form
-			}, // end 'init' method (known as 'constructor') added word
+					.appendTo('article.blog-post') // place in DOM
+					.on('click', this.show); // show the form
+			}, // end 'init' method 
 
 			// create 'show' method
 			show: function(){
@@ -124,13 +131,8 @@
 				}
 
 				// personal addition
-				cf.backdrop.call();
-				
-				// make h1 and button more visible
-				$('#container h1').addClass('more-visible');
-				$('#container button').attr('disabled', true).addClass('button-backdrop').css('cursor', 'crosshair');
-				
-				
+				cf.backdrop();
+
 			}, // end 'show' method
 
 			// create 'close' method
@@ -147,15 +149,21 @@
 					comms = cf.comments,
 					conf = cf.config;				
 				// creating the close button
-				$('<span class="xclose">X</span>')
+				$('<span></span>', {
+					class: 'xclose',
+					text: 'X',
+					tabindex: 5
+				})
 				// insert close button
 				.prependTo(this)
 				// hide the form when close button is clicked
-				.on('click', function(){
+				.on('click || keyPress', function(){
 					/* version: array notation with default effect, other versions in index4.html */
 					$this[conf.formHide](conf.hideSpeed);
 					/*
-					  to demo different techniques and results demo-ing the 'this' keyword in the console, refer to index4.html
+					 * to demo different techniques and results 
+					 * demo-ing the 'this' keyword in the console, 
+					 * refer to index4.html
 					*/
 					//console.log(this);
 
@@ -163,8 +171,12 @@
 					cf.startpoint.call();
 					
 					// return h1 and button to normal
-					$('#container h1').removeClass('more-visible');
-					$('#container button').attr('disabled', false).removeClass('button-backdrop').css('cursor', 'pointer');
+					$('#container h1')
+						.removeClass('more-visible');
+
+					$('#container button')
+						.attr('disabled', false)
+						.removeClass('button-backdrop');
 				});
 			} // end 'close' method
 		};

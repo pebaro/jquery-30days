@@ -12,7 +12,7 @@ body {
 	font-family: sans-serif; background: rgba(0,0,0,0); text-align: left;
 }
 .backdrop {
-	background: rgba(0,0,0,0.85);
+	background: rgba(0,0,0,0.8);
 	position: relative;
 	z-index: 1;
 }
@@ -21,20 +21,20 @@ body {
 	z-index: 5; 
 }
 hr {
-	margin: 25px 0 20px 20px;
+	margin: 25px 0 20px 40px;
 }
 .hide { display: none; }
 article {
-	width: inherit; background: #FFF;
+	width: inherit; background: transparent;
 	margin: 20px 0 20px; padding: 20px 20% 10px;
 	border-top: 1px solid #E9E9E9; 
 	border-bottom: 1px solid #E9E9E9; 
 	border-radius: none;
 }
 .js article {
-	width: inherit; background: #FFF;
+	width: inherit; background: transparent;
 	margin: 20px 0 0; padding: 20px 20% 10px;
-	border: 1px solid #E9E9E9; border-radius: 5px !important;
+	border: 1px solid #E9E9E9;;
 	border-left: none !important;
 	border-right: none !important;
 }
@@ -67,9 +67,9 @@ p:last-child {
 	margin-bottom: 20px !important;
 }
 #comments-form {
-	display: block; border: 1px solid rgba(255, 255, 255, 1);
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
+	display: block; 
+	border-top: 1px solid rgba(255, 255, 255, .5);
+	border-bottom: 1px solid rgba(255, 255, 255, .5);
 	z-index: 10;
 }
 #comments-form, .js #comments-form { 
@@ -94,19 +94,32 @@ label {
 }
 input, textarea {
 	margin: 2px 0 20px;
-	width: 75%;
+	/*width: 75%;*/
 }
-input { width: 65%; } textarea { width: 80%; }
+input { width: 65%; } 
+/*input:focus { width: 71% !important; }*/
+/*textarea:focus { width: 85% !important; }*/
+textarea { width: 80%; }
 input, textarea {
-	margin: 2px 40px 20px 0; padding: 10px 8px; border-radius: 2px;
-	border: #333; font-size: 0.8em; 
+	margin: 2px 40px 20px 0; 
+    padding: 10px 8px; 
+    border-radius: 2px;
+	border: #333;
+    font-size: 0.8em;
+    font-family: sans-serif; 
+    color: #794e0b; font-weight: bold;
+    text-align: left;
 }
-input:focus, textarea:focus { background: #333; }
+input:focus, textarea:focus { 
+    background: #333; 
+}
 input[type="submit"] {
 	width: auto; background: none; 
 	padding: 10px 20px;
-	border: 1px solid #F9F1D2; border-radius: 4px;
-	font-weight: bold; color: #F9F1D2; font-size: 0.7em;
+	border: 1px solid #F9F1D2; 
+    border-radius: 8px;
+	font-weight: bold; color: #F9F1D2; 
+    font-size: 0.7em;
 	cursor: pointer;
 	-webkit-transition: all 0.8s ease;
 	-moz-transition: all 0.8s ease;
@@ -117,15 +130,28 @@ input[type="submit"] {
 input[type="submit"]:hover {
 	background: #F9F1D2;
 	border: 1px solid #F9F1D2;
-	font-weight: bold; color: #000 !important;
+	font-weight: bold; 
+    color: #000 !important;
 }
 input[type="submit"]:focus {
-    outline:none; color: #F9F1D2;
+    color: #F9F1D2;
+    outline:1px solid #000;
+    font-weight: bold;
+    border-radius: 0;
+	-webkit-transition: all 0.8s ease;
+	-moz-transition: all 0.8s ease;
+	-ms-transition: all 0.8s ease;
+	-o-transition: all 0.8s ease;
+	transition: all 0.8s ease;
+	width: auto !important;
 }
 button {
-	width: auto; background: transparent; padding: 10px 20px; margin: 30px 25px;
-	border: 1px solid #8E5F0A; border-radius: 5px;
-	font-weight: bold; color: #8E5F0A; font-size: 0.7em;
+	width: auto; background: transparent; 
+    padding: 10px 20px; margin: 30px 0;
+	border: 1px solid #8E5F0A; 
+    border-radius: 8px;
+	font-weight: bold; color: #8E5F0A; 
+    font-size: 0.7em;
 	cursor: pointer;
 	-webkit-transition: all 0.8s ease;
 	-moz-transition: all 0.8s ease;
@@ -142,24 +168,28 @@ button:hover {
 button:focus {
     outline:none;
 }
+input:focus {
+    outline:1px solid #f8c87d;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	color: #F9F1D2 !important;
+    font-weight: normal;
+}
+textarea:focus {
+    outline:1px solid #f8c87d;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	color: #F9F1D2 !important;
+    font-weight: normal;
+}
+
 .button-backdrop {
 	background: #777 !important;
 	border: 1px solid #000 !important;
 	color: #222 !important;
-}
-input:focus {
-    outline:1px solid #7DECF8;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-	color: #7DECF8;
-}
-textarea:focus {
-    outline:1px solid #7DECF8;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-	color: #7DECF8;
+    cursor: none;
 }
 span.xclose {
 	background: #F9F1D2; display: block;
@@ -177,8 +207,20 @@ span.xclose {
 	transition: all 0.8s ease;
 }
 span.xclose:hover {
-	background: #222;
+	background: none !important;
 	color: #F9F1D2;
-	border: 1px dashed #F9F1D2;
+	border: 1px solid #F9F1D2 !important;
 	border-radius: 50%;
+}
+span.xclose:focus {
+	outline-style: inherit;
+	border-radius: 50%;
+	border: 1px dashed #FFF;
+	background: #333;
+	-webkit-transition: all 0.8s ease;
+	-moz-transition: all 0.8s ease;
+	-ms-transition: all 0.8s ease;
+	-o-transition: all 0.8s ease;
+	transition: all 0.8s ease;
+	color: #FFF;
 }

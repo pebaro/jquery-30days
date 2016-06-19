@@ -27,19 +27,19 @@
 				<h2 class="form-heading">Comments Form</h2>
 				<ul>
 					<li>
-						<label for="name">Name: </label>
-						<input type="text" id="name" name="name">
+						<label for="name">Name: <br>
+						<input type="text" id="name" name="name" tabindex="1"></label>
 					</li>
 					<li>
-						<label for="email">Email: </label>
-						<input type="email" id="email" name="email">
+						<label for="email">Email: <br>
+						<input type="email" id="email" name="email" tabindex="2"></label>
 					</li>
 					<li>
-						<label for="comments">Comments: </label>
-						<textarea type="text" id="comments" name="comments" rows="8"></textarea>
+						<label for="comments">Comments: <br>
+						<textarea type="text" id="comments" name="comments" rows="8" tabindex="3"></textarea></label>
 					</li>
 					<li>
-						<input type="submit" value="Submit Comments">
+						<input type="submit" value="Submit Comments" tabindex="4">
 					</li>
 				</ul>
 			</form>
@@ -63,6 +63,89 @@
 			// set position of '.each' when it occurs
 			}).prependTo($(this).closest('p'));
 			//console.log(this); /* 'this' works as eg within object contents but see difference in console */
+		});
+
+		displayForm = { // object to show/hide form 
+
+			form: $('div#comments-form'), // cache form 
+
+			// method: config (for developer configurations)
+			config: {
+				showComments: 'fadeIn',
+				hideComments: 'fadeOut',
+				showSpeed: 500,
+				hideSpeed: 500
+			},
+
+			// method: init
+			init: function(config){
+				console.log(this); // confirm what 'this' is 
+
+				$.extend(this.config, config);
+				
+				/* create button, fill with content using an object 
+					button shows the form that is hidden when javascript is enabled */
+				$('<button></button>', {
+					class: 'your-comments',
+					text: 'Your Comments'
+				})
+					.appendTo('article.blog-post') // place button in DOM
+					.on('click', this.show);
+					//$('div#comments-form').find('#name').focus('focus', true);
+					
+			},
+			// method: show
+			show: function(){
+				//console.log(this); // logs the button in console
+				console.log('show method has been called'); // message logged 
+				
+				// variables for shorter code and performance
+				var dF = displayForm,
+					dFf = dF.form,
+					dFc = dF.config,
+					dFcsC = dFc.showComments,
+					dFcsS = dFc.showSpeed;
+
+				dF.close.call(this); // call the close button to show
+
+				dFf[dFcsC](dFcsS); // show form 
+			},
+			// method: close
+			close: function(){
+				// console.log(this); // comments button
+				/* create a close button 
+					use an object to fill button with content 
+					also make sure that a span isn't created each time form is displayed */
+
+				// variables for shorter code and performance
+				var dF = displayForm,
+					dFf = dF.form,
+					dFc = dF.config,
+					dFchC = dFc.hideComments,
+					dFchS = dFc.hideSpeed;
+
+				if( $.find('span.xclose').length ) {
+					return; // if the close button exists do not create another
+				}
+
+				$('<span></span>', {
+					class: 'xclose',
+					text: 'X',
+					tabindex: 5
+				}) // button created
+					.prependTo(displayForm.form) // place in DOM
+						.on('click || keypress', function(){ // event handler
+							dFf[dFchC](dFchS); // hide form 
+							console.log('X close button has been clicked'); // confirm in console
+						});
+			}
+		};
+		// Developers can now configure effects and their speeds
+		displayForm.init({
+			showComments: 'slideDown',
+			hideComments: 'fadeOut',
+			showSpeed: 400,
+			hideSpeed: 800
 		});
 
 	})(); // *1: end shorthand

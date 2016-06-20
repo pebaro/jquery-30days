@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<!--
+	Explaining the $(this) keyword as the meaning changes depending on script location
+-->
+<head>
+	<meta charset="utf-8">
+	<title>$(this)</title>
+	<link rel="stylesheet" type="text/css" href="_css/main.css">
+	<script src="../jquery-1.12.3.js"></script>
+</head> 
+<body>
+	<div id="container">
+
+		<h1>Using $(this)</h1>
+		<h2>Explaining $(this) in different contexts</h2>
+		<hr>
+		<section>
+			<button href="https://pebaro.co.uk" target="_blank">click me</button>
+		</section>
+
+	</div>
+<script>
+(function($){ // for WordPress sites
+	(function(){ // shorthand (document).ready(function(){});
+
+		function thisFunc(e){
+			e.preventDefault();
+			console.log(e);
+			console.log(this);
+		}
+		thisFunc();
+
+	})(); // shorthand END
+})(jQuery); // for WordPress END
+
+</script>
+</body>
+</html>
